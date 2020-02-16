@@ -3,9 +3,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Connection } from 'typeorm';
+import { PoiModule } from './pois/poi/poi.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot()],
+  imports: [PoiModule, TypeOrmModule.forRoot()],
   controllers: [AppController],
   providers: [AppService],
 })
