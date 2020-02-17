@@ -6,6 +6,8 @@ services:
     container_name: heticmadu-api-app
     ports:
       - 4000:4000
+    depends_on:
+      - api-db
   api-db:
     env_file:
       - .env
@@ -20,7 +22,7 @@ services:
       - ../db/dump.sql:/docker-entrypoint-initdb.d/dump.sql
       - db-data:/var/lib/mysql
     ports:
-      - 3306:3306
+      - 3356:3306
 
 volumes:
   db-data: {}
