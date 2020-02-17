@@ -25,10 +25,10 @@ script:
   - docker build -t $DOCKER_USERNAME/heticmadu-api-app:latest -f ./devops/docker/Dockerfile ./
   - docker push $DOCKER_USERNAME/heticmadu-api-app:latest
   - openssl aes-256-cbc -K $encrypted_584f93c26d12_key -iv $encrypted_584f93c26d12_iv -in $ENCRYPTED_PRIVATE_KEY_PATH -out $PRIVATE_KEY_PATH -d
-  - ssh-keyscan -H $API_URL
+  - ssh-keyscan -H $EC2_URL
   - chmod -R 600 $PRIVATE_KEY_PATH
   - eval $(ssh-agent)
   - ssh-add $PRIVATE_KEY_PATH
-  - scp -o StrictHostKeyChecking=no ./devops/docker/docker-compose.yml ubuntu@$API_URL:/home/ubuntu/docker-compose.api.yml
-  - ssh -i $PRIVATE_KEY_PATH ubuntu@$API_URL 'bash -s' < ./devops/deploy.sh
+  - scp -o StrictHostKeyChecking=no ./devops/docker/docker-compose.yml ubuntu@$EC2_URL:/home/ubuntu/docker-compose.api.yml
+  - ssh -i $PRIVATE_KEY_PATH ubuntu@$EC2_URL 'bash -s' < ./devops/deploy.sh
   - rm $PRIVATE_KEY_PATH
