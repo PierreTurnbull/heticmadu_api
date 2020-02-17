@@ -24,7 +24,9 @@ script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   - docker build -t $DOCKER_USERNAME/heticmadu-api-app:latest -f ./devops/docker/Dockerfile ./
   - docker push $DOCKER_USERNAME/heticmadu-api-app:latest
-  - openssl aes-256-cbc -K $encrypted_584f93c26d12_key -iv $encrypted_584f93c26d12_iv -in $ENCRYPTED_PRIVATE_KEY_PATH -out $PRIVATE_KEY_PATH -d
+  - ls
+  - ls ./devops
+  - openssl aes-256-cbc -K $encrypted_584f93c26d12_key -iv $encrypted_584f93c26d12_iv -in ./devops/private_key.enc -out ./private_key -d
   - openssl aes-256-cbc -K $encrypted_584f93c26d12_key -iv $encrypted_584f93c26d12_iv -in ./.env.enc -out ./.env -d
   - ssh-keyscan -H $EC2_URL
   - chmod -R 600 $PRIVATE_KEY_PATH
