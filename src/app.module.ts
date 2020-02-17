@@ -7,11 +7,11 @@ import { AppService } from './app.service';
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'heticmadu-api-db',
-      port: 3306,
-      username: 'heticmadu',
-      password: 'j30d8YEf_2FEO',
-      database: 'heticmadu',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DB,
       logging: true,
       entities: [
         __dirname + '/../**/*.entity{.ts,.js}',
