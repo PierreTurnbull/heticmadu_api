@@ -1,0 +1,34 @@
+sudo: required
+
+services:
+  - docker
+
+language: node_js
+
+node_js:
+  - node
+
+branches:
+  only:
+    - master
+    - deployment
+
+env:
+  global:
+    - ENCRYPTED_PRIVATE_KEY_PATH=./devops/private_key.enc
+    - PRIVATE_KEY_PATH=./private_key
+
+script:
+  - npm i
+  - npm run build
+  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  - docker build -t $DOCKER_USERNAME/heticmadu-api-app:latest -f ./devops/docker/Dockerfile ./
+  - docker push $DOCKER_USERNAME/heticmadu-api-app:latest
+  - openssl aes-256-cbc -K $encrypted_4987b30d526d_key -iv $encrypted_4987b30d526d_iv -in $ENCRYPTED_PRIVATE_KEY_PATH -out $PRIVATE_KEY_PATH -d
+  - ssh-keyscan -H $API_URL
+  - chmod -R 600 $PRIVATE_KEY_PATH
+  - eval $(ssh-agent)
+  - ssh-add $PRIVATE_KEY_PATH
+  - scp -o StrictHostKeyChecking=no ./devops/docker/docker-compose.yml ubuntu@$API_URL:/home/ubuntu/docker-compose.api.yml
+  - ssh -i $PRIVATE_KEY_PATH ubuntu@$API_URL 'bash -s' < ./devops/deploy.sh
+  - rm $PRIVATE_KEY_PATH
