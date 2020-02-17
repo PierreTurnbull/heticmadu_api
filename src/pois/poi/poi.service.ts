@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { Poi } from './poi.entity';
+import { Injectable, Inject } from '@nestjs/common';
+import { PointOfInterest } from './poi.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { PoiModel } from '../../interfaces/poi.interface';
@@ -7,18 +7,18 @@ import { PoiModel } from '../../interfaces/poi.interface';
 @Injectable()
 export class PoiService {
     constructor(
-        @InjectRepository(Poi)
-        private readonly poiRepository: Repository<Poi>,
+        @InjectRepository(PointOfInterest)
+        private readonly poiRepository: Repository<PointOfInterest>,
     ) {}
-     _getPois() {
+     async _getPois() {
         return this.poiRepository.find();
     }
 
-     _getPoi(id): Promise<Poi[]> {
+     async _getPoi(id): Promise<PointOfInterest[]> {
         return this.poiRepository.find(id);
     }
 
-    _createPoi(poi: PoiModel) {
-        return this.poiRepository.create(poi);
+    async _createPoi(poi: PoiModel) {
+        return this.poiRepository.insert(poi);
     }
 }

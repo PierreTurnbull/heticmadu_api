@@ -2,10 +2,10 @@ import { Controller, Post, Get, Body } from '@nestjs/common';
 import { PoiService } from './poi.service';
 import { PoiModel } from '../../interfaces/poi.interface';
 
-@Controller('poi')
+@Controller('pois')
 export class PoiController {
     constructor(private poiService: PoiService) {}
-    @Get('pois')
+    @Get()
     getPois() {
         return this.poiService._getPois();
     }
@@ -15,9 +15,8 @@ export class PoiController {
         return this.poiService._getPoi(id);
     }
 
-    @Post()
+    @Post('all')
     createPoi(@Body() poi: PoiModel) {
-        console.log('createPoi', poi);
         return this.poiService._createPoi(poi);
     }
 }

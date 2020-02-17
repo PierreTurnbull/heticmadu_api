@@ -5,6 +5,7 @@
   "username": "root",
   "password": "",
   "database": "groupe5",
-  "entities": ["./src/**/*.entity.ts", "/dist/**/*.entity.js"],
-  "synchronize": true
+  "logging": true,
+  "synchronize": true,
+  "entities": ["./src/**/*.entity.ts", "/dist/**/*.entity.js"]
 }
