@@ -4,9 +4,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Connection } from 'typeorm';
 import { PoiModule } from './pois/poi/poi.module';
+import { ClientsModule } from './clients/clients.module';
 
 @Module({
-  imports: [PoiModule, TypeOrmModule.forRoot()],
+  imports: [PoiModule, ClientsModule, TypeOrmModule.forRoot()],
   controllers: [AppController],
   providers: [AppService],
 })
