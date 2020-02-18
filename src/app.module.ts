@@ -11,7 +11,7 @@ import { AppService } from './app.service';
       port: parseInt(process.env.DB_PORT),
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      database: process.env.DB_DB,
+      database: process.env.DB_SCHEMA,
       logging: true,
       entities: [
         __dirname + '/../**/*.entity{.ts,.js}',

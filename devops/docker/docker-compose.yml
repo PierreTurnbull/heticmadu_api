@@ -6,6 +6,13 @@ services:
     container_name: heticmadu-api-app
     ports:
       - 4000:4000
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_SCHEMA=${DB_SCHEMA}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_RANDOM_ROOT_PASSWORD=true
+      - DB_USER=${DB_USER}
     depends_on:
       - api-db
   api-db:
