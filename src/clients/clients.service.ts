@@ -11,11 +11,19 @@ export class ClientsService {
         private readonly clientsRepository: Repository<ClientsEntity>,
     ) {}
 
-    async _getClients() {
+    async getClients() {
         return this.clientsRepository.find();
     }
 
-    async _createClients(client: ClientsModel) {
-        return this.clientsRepository.insert(client);
+    async getClient(id: number) {
+        return this.clientsRepository.findOne(id);
+    }
+
+    async createClients(clientsBody: ClientsModel) {
+        const { clients } = clientsBody;
+        for (let i = 0; i < clients.length; i++) {
+            await this.clientsRepository.insert(clients[i])
+        }
+        return null;
     }
 }
