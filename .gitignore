@@ -2,4 +2,5 @@
 **/package-lock.json
 **/dist
 **/.env
+**/.env.*
 **/private_key

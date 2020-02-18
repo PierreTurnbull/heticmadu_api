@@ -15,16 +15,16 @@ branches:
 
 script:
   - npm i
-  - openssl aes-256-cbc -K $encrypted_584f93c26d12_key -iv $encrypted_584f93c26d12_iv -in ./devops/secrets/secrets.tar.enc -out secrets.tar -d
+  - openssl aes-256-cbc -K $encrypted_584f93c26d12_key -iv $encrypted_584f93c26d12_iv -in ./devops/prod/secrets/secrets.tar.enc -out secrets.tar -d
   - tar xvf ./secrets.tar
   - npm run build
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-  - docker build -t $DOCKER_USERNAME/heticmadu-api-app:latest -f ./devops/docker/Dockerfile ./
+  - docker build -t $DOCKER_USERNAME/heticmadu-api-app:latest -f ./devops/prod/docker/Dockerfile ./
   - docker push $DOCKER_USERNAME/heticmadu-api-app:latest
   - ssh-keyscan -H $EC2_URL
-  - chmod -R 600 ./devops/secrets/private_key
+  - chmod -R 600 ./devops/prod/secrets/private_key
   - eval $(ssh-agent)
-  - ssh-add ./devops/secrets/private_key
-  - scp -o StrictHostKeyChecking=no ./devops/docker/docker-compose.yml ubuntu@$EC2_URL:/home/ubuntu/docker-compose.api.yml
-  - scp -o StrictHostKeyChecking=no ./devops/secrets/.env ubuntu@$EC2_URL:/home/ubuntu/.env
-  - ssh -i ./devops/secrets/private_key ubuntu@$EC2_URL 'bash -s' < ./devops/scripts/deploy.sh
+  - ssh-add ./devops/prod/secrets/private_key
+  - scp -o StrictHostKeyChecking=no ./devops/prod/docker/docker-compose.yml ubuntu@$EC2_URL:/home/ubuntu/docker-compose.api.yml
+  - scp -o StrictHostKeyChecking=no ./devops/prod/secrets/.env ubuntu@$EC2_URL:/home/ubuntu/.env
+  - ssh -i ./devops/prod/secrets/private_key ubuntu@$EC2_URL 'bash -s' < ./devops/prod/scripts/deploy.sh
