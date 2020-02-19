@@ -8,6 +8,11 @@ The database system is not accessible from outside the server.
 
 The API documentation will be available here: http://52.47.64.108:4000/api (WIP)
 
+## Contributors
+
+- Pierre Turnbull
+- Billal Ouaali
+
 ## Stack
 
 - API framework: [NestJS](https://nestjs.com/) enables building a strong, complex API using TypeScript and that supports various tools such as ORM frameworks, authentication middlewares or documentation frameworks.
@@ -21,11 +26,17 @@ The API documentation will be available here: http://52.47.64.108:4000/api (WIP)
 
 The database schema is [available online](https://app.quickdatabasediagrams.com/#/d/IwTszG).
 
-### Authentication
+### Authentication (WIP: not done yet)
 
 Authentication is operated by Passport. Used alongside with NestJS, it is easy to set up and it provides security to our application.
 
 A strategy (the way a ressource is protected) is defined and each route that requires authentication is guarded by Passport with this strategy.
+
+2 strategies are used:
+- a "local" strategy that guards the authentification route (/login). It checks for credentials in the body of the request and provides a JWT that will be returned to the client if the credentials are valid. Else, it returns a 401.
+- a JWT strategy that guards every route that requires the request to be authorized. It checks for the presence and validity of a JWT in the request. If the validity test fails, a 401 is returned.
+
+After a validity test is succesfully passed, the controller of the protected route is called. If the test fails, the controller is never called because Passport sends a response with an error code.
 
 ## Get started
 
@@ -72,13 +83,3 @@ _Alternatively, in the future, another way of encrypting the secrets may be used
 The application image is built and pushed to the hub, so it will be available from the server.
 
 The docker environment for production is set up on the server using ssh, scp and a script during the Travis script. This requires the private key corresponding to the project to be available in the CI environment. The encrypted archive contains it. The encrypted archive is decrypted using ssl and a key contained in the Travis environment (no human can access it).
-
-## Don't bother reading this
-
-// qui a fait quoi // liens repos // readme pour chaque repo // schema bdd // noms des personnes impliquées dans le repo // techs utilisées // DETAILLER L'AUTHENTICATION // si tests faits, le préciser dans le readme // soutenance : pourquoi telles techs plutôt que telles autres techs // infra : 
-
-// todo : ansible description brève des rôles
-
-// todo : ansible exemple de commande pour lancer les ressources et variables à remplacer
-
-// todo : terraform description brève des différentes ressources
