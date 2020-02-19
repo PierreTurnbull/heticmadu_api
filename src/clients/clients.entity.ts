@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from 'typeorm';
+import { ClientPositionsEntity } from 'src/clientPositions/clientPositions.entity';
 
 @Entity('client')
 export class ClientsEntity {
@@ -31,4 +32,13 @@ export class ClientsEntity {
 
     @Column()
     creationDate: string;
+
+    @OneToMany(type => ClientPositionsEntity, translation => translation.clientId, { cascade: ['insert', 'update'] })
+    @JoinColumn([
+        {
+            name: 'id',
+            referencedColumnName: 'clientId'
+        }
+    ])
+    clientPositions: ClientPositionsEntity;
 }
