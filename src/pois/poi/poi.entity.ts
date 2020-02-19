@@ -1,9 +1,24 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Tag } from '../tag/tag.entity';
 
 @Entity('point_of_interest')
 export class PointOfInterest {
     @PrimaryGeneratedColumn()
     id: number;
+
+    @ManyToMany(type => Tag, { cascade: true })
+    @JoinTable({
+        name: 'point_of_interest_has_tags',
+        joinColumn: {
+            name: 'poiId',
+            referencedColumnName: 'id'
+        },
+        inverseJoinColumn: {
+            name: 'tagId',
+            referencedColumnName: 'id'
+        },
+    })
+    tags: Tag[];
 
     @Column()
     name: string;

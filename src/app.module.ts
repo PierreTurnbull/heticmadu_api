@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Connection } from 'typeorm';
 import { PoiModule } from './pois/poi/poi.module';
+import { TagModule } from './pois/tag/tag.module';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { PoiModule } from './pois/poi/poi.module';
         __dirname + '/../**/*.entity{.ts,.js}',
       ],
     }),
-    PoiModule
+    PoiModule, TagModule
   ],
   controllers: [AppController],
   providers: [AppService],
