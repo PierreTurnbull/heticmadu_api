@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param } from '@nestjs/common';
 import { PoiService } from './poi.service';
 import { PoiModel } from '../../interfaces/poi.interface';
 
@@ -11,11 +11,11 @@ export class PoiController {
     }
 
     @Get(':id')
-    getPoi(@Body('id') id: string) {
+    getPoi(@Param('id') id: string) {
         return this.poiService._getPoi(id);
     }
 
-    @Post('all')
+    @Post()
     createPoi(@Body() poi: PoiModel) {
         return this.poiService._createPoi(poi);
     }

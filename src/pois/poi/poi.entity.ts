@@ -1,9 +1,14 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { PoiHasTags } from '../poi-has-tags/poi-has-tags.entity';
 
 @Entity('point_of_interest')
 export class PointOfInterest {
     @PrimaryGeneratedColumn()
+    @ManyToOne(type => PoiHasTags, poiHasTags => poiHasTags.poiId)
     id: number;
+    // @ManyToOne(() => PoiHasTags, poiHasTags => poiHasTags.poiId)
+    // @JoinColumn({ name: 'id' })
+    // poiId: PoiHasTags;
 
     @Column()
     name: string;
