@@ -1,1 +1,1 @@
-CREATE DATABASE `heticmadu` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE `heticmadu` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
