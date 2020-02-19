@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param } from '@nestjs/common';
 import { TagService } from './tag.service';
 import { TagModel } from '../../interfaces/tag.interface';
 

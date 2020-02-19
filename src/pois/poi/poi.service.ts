@@ -14,19 +14,19 @@ export class PoiService {
         return this.poiRepository.find();
     }
 
-     async _getPoi(id) {
+     async _getPoi(id: number) {
         return this.poiRepository.findOne(id);
     }
 
     async _createPoi(poi: PoiModel) {
-        // insert return a Promise<InsertResult>
-        const currentPoi = this.poiRepository.insert(poi);;
-        currentPoi.then(res => {
-            const id = res.identifiers[0].id;
+        return this.poiRepository.save(poi);
+    }
 
+    async _deletePoi(id: number) {
+        return this.poiRepository.delete(id);
+    }
 
-        });
-
-        return currentPoi;
+    async _updatePoi(poi: PoiModel) {
+        return this.poiRepository.update(poi.id, poi)
     }
 }

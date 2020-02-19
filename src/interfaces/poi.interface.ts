@@ -1,3 +1,5 @@
+import { TagModel } from './tag.interface';
+
 export interface PoiModel {
     id?: number;
     name?: string;
@@ -24,4 +26,6 @@ export interface PoiModel {
     logo?: string;
     description?: string;
     status?: string;
+    tags?: TagModel[]
 }
+

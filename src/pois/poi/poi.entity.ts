@@ -1,14 +1,24 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
-import { PoiHasTags } from '../poi-has-tags/poi-has-tags.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Tag } from '../tag/tag.entity';
 
 @Entity('point_of_interest')
 export class PointOfInterest {
     @PrimaryGeneratedColumn()
-    @ManyToOne(type => PoiHasTags, poiHasTags => poiHasTags.poiId)
     id: number;
-    // @ManyToOne(() => PoiHasTags, poiHasTags => poiHasTags.poiId)
-    // @JoinColumn({ name: 'id' })
-    // poiId: PoiHasTags;
+
+    @ManyToMany(type => Tag, { cascade: true })
+    @JoinTable({
+        name: 'point_of_interest_has_tags',
+        joinColumn: {
+            name: 'poiId',
+            referencedColumnName: 'id'
+        },
+        inverseJoinColumn: {
+            name: 'tagId',
+            referencedColumnName: 'id'
+        },
+    })
+    tags: Tag[];
 
     @Column()
     name: string;
