@@ -72,3 +72,13 @@ _Alternatively, in the future, another way of encrypting the secrets may be used
 The application image is built and pushed to the hub, so it will be available from the server.
 
 The docker environment for production is set up on the server using ssh, scp and a script during the Travis script. This requires the private key corresponding to the project to be available in the CI environment. The encrypted archive contains it. The encrypted archive is decrypted using ssl and a key contained in the Travis environment (no human can access it).
+
+## Don't bother reading this
+
+// qui a fait quoi // liens repos // readme pour chaque repo // schema bdd // noms des personnes impliquées dans le repo // techs utilisées // DETAILLER L'AUTHENTICATION // si tests faits, le préciser dans le readme // soutenance : pourquoi telles techs plutôt que telles autres techs // infra : 
+
+// todo : ansible description brève des rôles
+
+// todo : ansible exemple de commande pour lancer les ressources et variables à remplacer
+
+// todo : terraform description brève des différentes ressources
