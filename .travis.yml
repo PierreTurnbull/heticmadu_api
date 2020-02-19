@@ -26,4 +26,5 @@ script:
   - ssh-add ./devops/prod/secrets/private_key
   - scp -o StrictHostKeyChecking=no ./devops/prod/docker/docker-compose.yml ubuntu@$EC2_URL:/home/ubuntu/docker-compose.api.yml
   - scp -o StrictHostKeyChecking=no ./devops/prod/secrets/.env ubuntu@$EC2_URL:/home/ubuntu/.env
+  - scp -o StrictHostKeyChecking=no ./devops/prod/db/dump.sql ubuntu@$EC2_URL:/home/ubuntu/dump.sql
   - ssh -i ./devops/prod/secrets/private_key ubuntu@$EC2_URL 'bash -s' < ./devops/prod/scripts/deploy.sh

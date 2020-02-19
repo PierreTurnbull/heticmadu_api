@@ -4,3 +4,4 @@
 **/.env
 **/.env.*
 **/private_key
+.idea
