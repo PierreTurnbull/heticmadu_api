@@ -3,7 +3,7 @@ export interface PoiModel {
     name?: string;
     longitude?: number;
     latitude?: number;
-    adress?: string;
+    address?: string;
     postalCode?: number;
     monday?: string;
     tuesday?: string;

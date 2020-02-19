@@ -1,3 +1,4 @@
+require('dotenv').config();
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -7,7 +8,21 @@ import { PoiModule } from './pois/poi/poi.module';
 import { TagModule } from './pois/tag/tag.module';
 
 @Module({
-  imports: [PoiModule, TagModule, TypeOrmModule.forRoot()],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_SCHEMA,
+      logging: true,
+      entities: [
+        __dirname + '/../**/*.entity{.ts,.js}',
+      ],
+    }),
+    PoiModule, TagModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
