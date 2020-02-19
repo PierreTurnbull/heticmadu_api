@@ -15,7 +15,7 @@ export class PointOfInterest {
     latitude: number;
 
     @Column()
-    adress: string;
+    address: string;
 
     @Column()
     postalCode: number;
