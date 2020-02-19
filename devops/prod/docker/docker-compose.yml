@@ -2,17 +2,14 @@ version: '3.5'
 
 services:
   api-app:
+    env_file:
+      - .env
     image: heticmadu/heticmadu-api-app:latest
     container_name: heticmadu-api-app
     ports:
       - 4000:4000
     environment:
-      - DB_HOST=${DB_HOST}
-      - DB_PORT=${DB_PORT}
-      - DB_SCHEMA=${DB_SCHEMA}
-      - DB_PASSWORD=${DB_PASSWORD}
       - DB_RANDOM_ROOT_PASSWORD=true
-      - DB_USER=${DB_USER}
     depends_on:
       - api-db
   api-db:
@@ -26,10 +23,8 @@ services:
       - MYSQL_RANDOM_ROOT_PASSWORD=true
       - MYSQL_USER=${DB_USER}
     volumes:
-      - ../db/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ./dump.sql:/docker-entrypoint-initdb.d/dump.sql
       - db-data:/var/lib/mysql
-    ports:
-      - 3306:3306
 
 volumes:
   db-data: {}

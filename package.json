@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "status": "docker ps -a && echo '' && docker images && echo '' && docker volume ls && echo '' && docker network ls",
-    "build:enc": "./devops/scripts/build_enc.sh",
+    "build:enc": "./devops/prod/scripts/build_enc.sh",
     "build": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "npm run docker:up",
@@ -15,7 +15,6 @@
     "docker:up": "docker-compose -f ./devops/dev/docker/docker-compose.yml up",
     "docker:debug:up": "docker-compose -f ./devops/dev/docker/docker-compose.yml up --build --force-recreate",
     "docker:debug:down": "docker-compose -f ./devops/dev/docker/docker-compose.yml down --rmi all -v",
-    "prestart:prod": "rimraf dist && npm run build",
     "start:prod": "node dist/main.js",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",

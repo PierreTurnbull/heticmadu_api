@@ -21,5 +21,6 @@ sudo docker system prune -f -a
 sudo docker-compose -f ./docker-compose.api.yml up -d
 
 # clean directory
-# rm ./docker-compose.api.yml
-# rm ./.env
+rm ./docker-compose.api.yml
+rm ./.env
+rm ./dump.sql
