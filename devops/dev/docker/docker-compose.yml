@@ -12,6 +12,8 @@ services:
       - 4000:4000
     environment:
       - DB_RANDOM_ROOT_PASSWORD=true
+    volumes:
+      - ../../..:/home/node
     depends_on:
       - api-db
   api-db:
@@ -28,7 +30,7 @@ services:
       - ../db/dump.sql:/docker-entrypoint-initdb.d/dump.sql
       - heticmadu-db-data:/var/lib/mysql
     ports:
-      - ${DB_PORT}:3306
+      - 3356:3306
 
 volumes:
   heticmadu-db-data: {}
