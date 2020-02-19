@@ -27,7 +27,7 @@ services:
       - MYSQL_RANDOM_ROOT_PASSWORD=true
       - MYSQL_USER=${DB_USER}
     volumes:
-      - ../db/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+      - ../../prod/db/dump.sql:/docker-entrypoint-initdb.d/dump.sql
       - heticmadu-db-data:/var/lib/mysql
     ports:
       - 3356:3306
