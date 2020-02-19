@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, Param } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param, Delete } from '@nestjs/common';
 import { TagService } from './tag.service';
 import { TagModel } from '../../interfaces/tag.interface';
 
@@ -13,5 +13,10 @@ export class TagController {
     @Post()
     createTag(@Body() tag: TagModel) {
         return this.tagService._createTag(tag);
+    }
+
+    @Delete(':id')
+    deleteTag(@Param('id') id: number) {
+        return this.tagService._deleteTag(id);
     }
 }

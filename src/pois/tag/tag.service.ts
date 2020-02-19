@@ -18,4 +18,8 @@ export class TagService {
     async _createTag(tag: TagModel) {
         return this.tagRepository.insert(tag);
     }
+
+    async _deleteTag(id: number) {
+        return this.tagRepository.delete(id)
+    }
 }
