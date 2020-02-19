@@ -9,6 +9,7 @@
     "build:enc": "./devops/prod/scripts/build_enc.sh",
     "build": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"src/**/*.ts\"",
+    "db:dump": "docker exec heticmadu-api-db mysqldump -u admin -padmin --databases heticmadu --skip-comments > ./devops/dev/db/dump.sql",
     "start": "npm run docker:up",
     "start:dev": "nodemon",
     "start:debug": "npm run docker:debug:down && npm run docker:debug:up",
