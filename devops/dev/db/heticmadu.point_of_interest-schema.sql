@@ -23,7 +23,7 @@ CREATE TABLE `point_of_interest` (
   `disabledAccess` tinyint(4) NOT NULL,
   `greenScore` int(11) NOT NULL,
   `phoneNumber` varchar(255) NOT NULL,
-  `logo` varchar(255) NOT NULL,
+  `picture` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,

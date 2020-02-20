@@ -23,7 +23,7 @@ export interface PoiModel {
     disabledAccess?: boolean;
     greenScore?: number;
     phoneNumber?: string;
-    logo?: string;
+    picture?: string;
     description?: string;
     status?: string;
     tags?: TagModel[]

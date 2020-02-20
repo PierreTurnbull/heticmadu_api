@@ -19,7 +19,7 @@ export class ClientsEntity {
     numberOfEmployees: number;
 
     @Column()
-    logo: string;
+    picture: string;
 
     @Column()
     perimeter: number;

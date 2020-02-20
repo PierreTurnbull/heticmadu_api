@@ -6,7 +6,7 @@ export interface ClientModel {
     address: string;
     rse: string;
     numberOfEmployees: number;
-    logo: string;
+    picture: string;
     perimeter: number;
     status: string;
     type: string;

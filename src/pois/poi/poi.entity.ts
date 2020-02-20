@@ -84,7 +84,7 @@ export class PointOfInterest {
     phoneNumber: string;
 
     @Column()
-    logo: string;
+    picture: string;
 
     @Column()
     description: string;
