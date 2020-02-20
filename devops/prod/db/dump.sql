@@ -51,7 +51,7 @@ CREATE TABLE `point_of_interest` (
   `name` varchar(255) NOT NULL,
   `longitude` int(11) NOT NULL,
   `latitude` int(11) NOT NULL,
-  `adress` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
   `postalCode` int(11) NOT NULL,
   `monday` varchar(255) NOT NULL,
   `tuesday` varchar(255) NOT NULL,

@@ -3,11 +3,11 @@
 
 CREATE TABLE `client_position` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `longitude` varchar(128) DEFAULT NULL,
-  `latitude` varchar(128) DEFAULT NULL,
-  `perimeter` int(11) DEFAULT NULL,
-  `clientId` int(11) DEFAULT NULL,
+  `perimeter` int(11) NOT NULL,
+  `clientId` int(11) NOT NULL,
+  `longitude` varchar(255) NOT NULL,
+  `latitude` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `clientId` (`clientId`),
-  CONSTRAINT `client_position_ibfk_1` FOREIGN KEY (`clientId`) REFERENCES `client` (`id`)
+  KEY `FK_0dc1d558b53ca2163b628ff2537` (`clientId`),
+  CONSTRAINT `FK_0dc1d558b53ca2163b628ff2537` FOREIGN KEY (`clientId`) REFERENCES `client` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

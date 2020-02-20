@@ -3,14 +3,14 @@
 
 CREATE TABLE `client` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(128) DEFAULT NULL,
-  `address` varchar(128) DEFAULT NULL,
-  `rse` varchar(128) DEFAULT NULL,
-  `numberOfEmployees` int(11) DEFAULT NULL,
-  `logo` varchar(255) DEFAULT NULL,
-  `perimeter` int(11) DEFAULT NULL,
-  `status` varchar(32) DEFAULT NULL,
-  `type` varchar(32) DEFAULT NULL,
-  `creationDate` varchar(10) DEFAULT NULL,
+  `numberOfEmployees` int(11) NOT NULL,
+  `picture` varchar(255) NOT NULL,
+  `perimeter` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `rse` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `creationDate` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
