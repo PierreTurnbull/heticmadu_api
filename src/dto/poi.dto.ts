@@ -48,9 +48,6 @@ export class PoiDTO {
     category: string;
 
     @ApiProperty()
-    type: string;
-
-    @ApiProperty()
     averagePrice: string;
 
     @ApiProperty()
@@ -69,7 +66,7 @@ export class PoiDTO {
     phoneNumber: string;
 
     @ApiPropertyOptional()
-    logo: string;
+    picture: string;
 
     @ApiPropertyOptional()
     description: string;

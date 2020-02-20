@@ -1,7 +1,8 @@
 import { Controller, Post, Get, Body, Param, Patch, Delete } from '@nestjs/common';
 import { PoiService } from './poi.service';
 import { PoiDTO } from 'src/dto/poi.dto';
-import { ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse, ApiTags, ApiParam, ApiOperation } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse, ApiTags, ApiParam, ApiOperation, ApiBadRequestResponse,
+    ApiResponse } from '@nestjs/swagger';
 import { PoiParamRequestDto } from '../../dto/poi.param.request.dto';
 import { poiResponseExample } from '../examples/get-poi-response.example'
 
@@ -11,7 +12,7 @@ export class PoiController {
     constructor(private poiService: PoiService) {}
 
     @Get()
-    @ApiOperation({ summary: 'Get all POIS', description: 'Returns all POIS' })
+    @ApiOperation({ summary: 'Get all POIS.', description: 'Returns all POIS.' })
     @ApiOkResponse({ description: 'Successful operation.', schema: {
             example: poiResponseExample[0]
         }
@@ -22,9 +23,9 @@ export class PoiController {
     }
 
     @Get(':id')
-    @ApiOperation({ summary: 'Get a POI by ID', description: 'Returns single POI' })
+    @ApiOperation({ summary: 'Get a POI by ID', description: 'Returns single POI.' })
     @ApiParam({
-        description: 'ID of POI to return',
+        description: 'ID of POI to return.',
         required: true,
         name: 'id',
         type: Number,
@@ -35,8 +36,10 @@ export class PoiController {
     }
 
     @Post()
-    @ApiOperation({ summary: 'Create a POI', description: 'Returns a single POI' })
-    @ApiCreatedResponse({ description: 'The POI has been created succesfully.'})
+    @ApiOperation({ summary: 'Create a POI', description: 'Returns a single POI.' })
+    @ApiCreatedResponse({ description: 'The POI has been succesfully created.', schema: {
+            example: { id: 1, ...poiResponseExample[0]}
+        }})
     @ApiForbiddenResponse({ description: 'Access forbidden.'})
     createPoi(@Body() poi: PoiDTO) {
         return this.poiService._createPoi(poi);
@@ -48,6 +51,18 @@ export class PoiController {
     }
 
     @Patch()
+    @ApiParam({
+        description: 'POI that contains an ID to update.',
+        name: 'body',
+        type: PoiDTO
+    })
+    @ApiOperation({ summary: 'Update a POI', description: 'Update a single POI.' })
+    @ApiOkResponse({ description: 'POI succesfully updated.', schema: {
+            example: poiResponseExample[0]
+        }
+    })
+    @ApiBadRequestResponse({ description: 'Invalid ID supplied.' })
+    @ApiResponse({ description: 'POI not found.', status: 404 })
     updatePoi(@Body() poi: PoiDTO) {
         return this.poiService._updatePoi(poi);
     }
