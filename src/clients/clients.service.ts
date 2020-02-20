@@ -3,7 +3,6 @@ import { Repository, Connection } from 'typeorm';
 import { ClientsEntity } from './clients.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClientsModel } from '../interfaces/clients.interface';
-import { ClientPositionEntity } from 'src/clientPositions/clientPosition.entity';
 
 @Injectable()
 export class ClientsService {
