@@ -1,0 +1,32 @@
+/*!40101 SET NAMES binary*/;
+/*!40014 SET FOREIGN_KEY_CHECKS=0*/;
+/*!40103 SET TIME_ZONE='+00:00' */;
+INSERT INTO `point_of_interest` VALUES
+("",0,0,"",0,"","","","","","","","","","","",0,"",0,0,"","","","",1),
+("",0,0,"",0,"","","","","","","","","","","",0,"",0,0,"","","","",2),
+("",0,0,"",0,"","","","","","","","","","","",0,"",0,0,"","","","",3),
+("",0,0,"",0,"","","","","","","","","","","",0,"",0,0,"","","","",4),
+("",0,0,"",0,"","","","","","","","","","","",0,"",0,0,"","","","",5),
+("",0,0,"",0,"","","","","","","","","","","",0,"",0,0,"","","","",6),
+("",0,0,"",0,"","","","","","","","","","","",0,"",0,0,"","","","",7),
+("",0,0,"",0,"","","","","","","","","","","",0,"",0,0,"","","","",8),
+("",0,0,"",0,"","","","","","","","","","","",0,"",0,0,"","","","",9),
+("",0,0,"",0,"","","","","","","","","","","",0,"",0,0,"","","","",10),
+("",0,0,"",0,"","","","","","","","","","","",0,"",0,0,"","","","",11),
+("",0,0,"",0,"","","","","","","","","","","",0,"",0,0,"","","","",12),
+("",0,0,"",0,"","","","","","","","","","","",0,"",0,0,"","","","",13),
+("bjr pierrot gg",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",14),
+("bjr sdq gg",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",15),
+("bjr sdq gg",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",16),
+("bjr sdq gg",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",17),
+("test vico",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",18),
+("hello",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",19),
+("hellooooo",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",20),
+("hellooooo",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",21),
+("bjr pierrot gg",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",22),
+("bjr pierrot gg",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",23),
+("bjr pierrot gg",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",24),
+("bjr pierrot gg",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",25),
+("bjr pierrot gg",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",26),
+("bjr pierrot gg",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",27),
+("bjr pierrot gg",1,2,"momo",91100,"RE","RE","RE","RE","RE","RE","RE","3","4","3 rue des FOUS","300",1,"OE",1,3,"06676767","gigastring","ya pas de desc","OE",28);

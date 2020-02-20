@@ -1,8 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { ClientsEntity } from '../clients/clients.entity';
 
-@Entity('client')
-export class ClientPositionsEntity {
+@Entity('client_position')
+export class ClientPositionEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -18,7 +18,7 @@ export class ClientPositionsEntity {
     @Column()
     clientId: number;
 
-    @ManyToOne(type => ClientsEntity, { cascade: ['insert', 'update'] })
+    @ManyToOne(type => ClientsEntity)
     @JoinColumn()
     client: ClientsEntity;
 }

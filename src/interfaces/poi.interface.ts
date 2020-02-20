@@ -1,9 +1,11 @@
+import { TagModel } from './tag.interface';
+
 export interface PoiModel {
     id?: number;
     name?: string;
     longitude?: number;
     latitude?: number;
-    adress?: string;
+    address?: string;
     postalCode?: number;
     monday?: string;
     tuesday?: string;
@@ -24,4 +26,6 @@ export interface PoiModel {
     logo?: string;
     description?: string;
     status?: string;
+    tags?: TagModel[]
 }
+

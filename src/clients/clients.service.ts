@@ -1,9 +1,9 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, Connection } from 'typeorm';
 import { ClientsEntity } from './clients.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ClientsModel } from '../interfaces/clients.interface';
-import { ClientPositionsEntity } from 'src/clientPositions/clientPositions.entity';
+import { ClientPositionEntity } from 'src/clientPositions/clientPosition.entity';
 
 @Injectable()
 export class ClientsService {
@@ -13,20 +13,18 @@ export class ClientsService {
     ) {}
 
     async getClients() {
-        return this.clientsRepository.find();
+        return this.clientsRepository.find({ relations: ['clientPositions'] });
     }
 
     async getClient(id: number) {
-        return this.clientsRepository.findOne(id);
+        return this.clientsRepository.findOne(id, { relations: ['clientPositions'] });
     }
 
     async createClients(clientsBody: ClientsModel) {
         const { clients } = clientsBody;
         for (let i = 0; i < clients.length; i++) {
-            let clientPositions = new ClientPositionsEntity();
-            let client = new ClientsEntity();
-            client.clientPositions = clientPositions;
-            await this.clientsRepository.insert(clients[i])
+            const client = clients[i]
+            await this.clientsRepository.save(client)
         }
         return null;
     }

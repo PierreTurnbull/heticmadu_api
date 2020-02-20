@@ -1,3 +1,5 @@
+import { ClientPositionModel } from "src/clientPositions/clientPosition.interface";
+
 export interface ClientModel {
     id?: number;
     name: string;
@@ -9,4 +11,5 @@ export interface ClientModel {
     status: string;
     type: string;
     creationDate: string;
+    clientPositions: ClientPositionModel[]
 }
