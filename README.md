@@ -60,7 +60,7 @@ The app can be accessed from your machine through port 4000.
 
 In order to debug the environment, run:
 
-__Be aware that this command will recreate containers, volumes and images, which may imply to data loss.__
+__Be aware that this command will recreate containers, volumes and images, which may imply data loss.__
 
 ```
 npm run start:debug
@@ -75,7 +75,7 @@ TypeORM entities define the structure of the database. If you must update the st
 Once you are done working on the database structure, you can dump it by running
 
 ```
-npm run db:dump
+npm run db:dump:prod
 ```
 
 This will generate a 1 file dump corresponding to the structure of the database, which will be used to initialize the production database.
@@ -91,6 +91,8 @@ Load them into the database base by running
 ```
 npm run db:load
 ```
+
+First, it will dump the database structure and load it back in the database. This is required in order to empty all the tables before filling them with data. Then it will load the fixtures into the database.
 
 __IMPORTANT: make sure that the syntax is correct and that you keep a newline at the end of the file. myloader will fail SILENTLY to load files that are not formatted correctly.__
 
