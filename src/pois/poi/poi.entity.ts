@@ -63,9 +63,6 @@ export class PointOfInterest {
     category: string;
 
     @Column()
-    type: string;
-
-    @Column()
     averagePrice: string;
 
     @Column()

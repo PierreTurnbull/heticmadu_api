@@ -16,7 +16,6 @@ CREATE TABLE `point_of_interest` (
   `sunday` varchar(255) NOT NULL,
   `schedule` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
   `averagePrice` varchar(255) NOT NULL,
   `glutenFree` tinyint(4) NOT NULL,
   `bio` varchar(255) NOT NULL,
@@ -28,4 +27,4 @@ CREATE TABLE `point_of_interest` (
   `status` varchar(255) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
