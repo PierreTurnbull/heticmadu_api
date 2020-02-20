@@ -1,4 +1,4 @@
-import { ClientPositionModel } from "src/clientPositions/clientPosition.interface";
+import { ClientPositionModel } from "src/client-positions/client-position.interface";
 
 export interface ClientModel {
     id?: number;

@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from 'typeorm';
-import { ClientPositionEntity } from '../clientPositions/clientPosition.entity';
+import { ClientPositionEntity } from '../client-positions/client-position.entity';
 
 @Entity('client')
 export class ClientsEntity {
