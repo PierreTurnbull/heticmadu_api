@@ -68,31 +68,32 @@ npm run start:debug
 
 ### Database management
 
-You can update the database structure (dev and prod) or fixtures (dev only).
+#### Structure
 
-In order to update the dump that will be used to create the database structure in prod, from your database, run
+TypeORM entities define the structure of the database. If you must update the structure of the database, update the entities. Changes will be reflected on the database.
 
-```
-npm run db:dump:prod
-```
-
-In order to update the dev dump of your database (structure and data), from your database, run
+Once you are done working on the database structure, you can dump it by running
 
 ```
 npm run db:dump
 ```
 
-Files are saved under ./devops/dev/db
+This will generate a 1 file dump corresponding to the structure of the database, which will be used to initialize the production database.
 
-_Note that this will also run npm db:dump:prod for the production database to have the same structure than your dev database_
+If you need to change the structure of the already existing production database, you must do it by hand, after having backed-up its data, since there may be conflicts between the old data and the new structure. Back-ups and automatization of production database structure updates will be implemented later.
 
-In order to load the data contained in the SQL files under ./devops/dev/db, to your database, run
+#### Fixtures
+
+You can write fixtures for the development database under `./devops/dev/db/heticmadu.<table_name>.sql`.
+
+Load them into the database base by running
 
 ```
 npm run db:load
 ```
 
-__IMPORTANT: when editing the SQL dumps made with mydumper, make sure that the syntax is correct and that you keep a newline at the end of the file. myloader will fail SILENTLY to load files that are not formatted correctly.__
+__IMPORTANT: make sure that the syntax is correct and that you keep a newline at the end of the file. myloader will fail SILENTLY to load files that are not formatted correctly.__
+
 
 ## Deployment
 
