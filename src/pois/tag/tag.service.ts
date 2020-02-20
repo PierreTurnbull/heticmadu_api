@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { Tag } from './tag.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { TagModel } from '../../interfaces/tag.interface';
+import { TagDTO } from 'src/dto/tag.dto';
 
 @Injectable()
 export class TagService {
@@ -15,7 +15,7 @@ export class TagService {
         return this.tagRepository.find();
     }
 
-    async _createTag(tag: TagModel) {
+    async _createTag(tag: TagDTO) {
         return this.tagRepository.insert(tag);
     }
 
