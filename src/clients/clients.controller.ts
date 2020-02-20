@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Body, Param } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param, Delete } from '@nestjs/common';
 import { ClientsService } from './clients.service';
 import { ClientsModel } from '../interfaces/clients.interface';
 
@@ -20,5 +20,12 @@ export class ClientsController {
     async createClient(@Body() clientsBody: ClientsModel) {
         await this.clientsService.createClients(clientsBody)
         return null;
+    }
+
+
+    @Delete(':id')
+    async deleteClient(@Param('id') id: number) {
+        await this.clientsService.deleteClient(id)
+        return null
     }
 }
