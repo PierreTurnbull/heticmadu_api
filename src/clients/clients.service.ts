@@ -27,4 +27,8 @@ export class ClientsService {
         }
         return null;
     }
+
+    async deleteClient(id: number) {
+        await this.clientsRepository.delete(id)
+    }
 }

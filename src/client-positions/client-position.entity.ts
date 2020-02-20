@@ -18,7 +18,7 @@ export class ClientPositionEntity {
     @Column()
     clientId: number;
 
-    @ManyToOne(type => ClientsEntity)
+    @ManyToOne(type => ClientsEntity, { onDelete: 'CASCADE' })
     @JoinColumn()
     client: ClientsEntity;
 }
