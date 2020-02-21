@@ -5,6 +5,7 @@ import { ApiTags, ApiOperation, ApiOkResponse, ApiForbiddenResponse, ApiParam, A
     ApiBadRequestResponse } from '@nestjs/swagger';
 import { poiResponseExample } from '../pois/examples/get-poi-response.example';
 import { AuthGuard } from '@nestjs/passport';
+import { clientResponseExample } from './examples/get-client-response.example';
 
 @ApiTags('clients')
 @Controller('clients')
