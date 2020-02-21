@@ -1,8 +1,8 @@
-import { Injectable, Inject } from '@nestjs/common';
-import { Repository, Connection } from 'typeorm';
+import { Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
 import { ClientsEntity } from './clients.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ClientsModel } from '../interfaces/clients.interface';
+import { ClientsModel } from '../dto/clients.dto';
 
 @Injectable()
 export class ClientsService {

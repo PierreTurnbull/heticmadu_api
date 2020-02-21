@@ -1,8 +1,9 @@
-import { Controller, Post, Get, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param, Delete, UseGuards } from '@nestjs/common';
 import { TagService } from './tag.service';
 import { TagDTO } from 'src/dto/tag.dto';
 import { ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse, ApiResponse, ApiBadRequestResponse, ApiTags,
     ApiOperation } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('tags')
 @Controller('tags')
@@ -10,6 +11,7 @@ export class TagController {
     constructor(private tagService: TagService) {}
 
     @Get()
+    @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Get all TAGS.', description: 'Returns all TAGS.' })
     @ApiOkResponse({ description: 'Successful operation.', schema: {
             example: [
@@ -25,6 +27,7 @@ export class TagController {
     }
 
     @Post()
+    @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Create a TAG.' })
     @ApiCreatedResponse({ description: 'Tag succesfully created.' })
     @ApiForbiddenResponse({ description: 'Access forbidden.'})
@@ -33,6 +36,7 @@ export class TagController {
     }
 
     @Delete(':id')
+    @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Delete a TAG by id.' })
     @ApiOkResponse({ description: 'Tag successfully deleted.'})
     @ApiForbiddenResponse({ description: 'Access forbidden.'})
