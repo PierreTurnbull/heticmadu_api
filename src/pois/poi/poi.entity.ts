@@ -6,7 +6,7 @@ export class PointOfInterest {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToMany(type => Tag, { cascade: true })
+    @ManyToMany(type => Tag)
     @JoinTable({
         name: 'point_of_interest_has_tags',
         joinColumn: {
@@ -23,10 +23,10 @@ export class PointOfInterest {
     @Column()
     name: string;
 
-    @Column()
+    @Column({ type: 'float' })
     longitude: number;
 
-    @Column()
+    @Column({ type: 'float' })
     latitude: number;
 
     @Column()

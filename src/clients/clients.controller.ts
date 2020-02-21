@@ -1,8 +1,11 @@
-import { Controller, Post, Get, Body, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param, Delete, Patch, UseGuards } from '@nestjs/common';
 import { ClientsService } from './clients.service';
-import { ClientsModel } from '../dto/clients.dto';
-import { ApiTags, ApiOperation, ApiOkResponse, ApiForbiddenResponse, ApiParam, ApiCreatedResponse, ApiResponse, ApiBadRequestResponse } from '@nestjs/swagger';
+import { ClientsDTO } from 'src/dto/clients.dto';
+import { ApiTags, ApiOperation, ApiOkResponse, ApiForbiddenResponse, ApiParam, ApiCreatedResponse, ApiResponse,
+    ApiBadRequestResponse } from '@nestjs/swagger';
+import { poiResponseExample } from '../pois/examples/get-poi-response.example';
 import { AuthGuard } from '@nestjs/passport';
+import { clientResponseExample } from './examples/get-client-response.example';
 
 @ApiTags('clients')
 @Controller('clients')
@@ -12,8 +15,7 @@ export class ClientsController {
     @Get()
     // @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Get all CLIENTS.', description: 'Returns all CLIENTS.' })
-    @ApiOkResponse({ description: 'Successful operation.'})
-    // schema: { example: poiResponseExample[0] }
+    @ApiOkResponse({ description: 'Successful operation.', schema: { example: clientResponseExample }})
     @ApiForbiddenResponse({ description: 'Access forbidden.'})
     getClients() {
         return this.clientsService.getClients();
@@ -36,10 +38,9 @@ export class ClientsController {
     @Post()
     // @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Create a CLIENT' })
-    @ApiCreatedResponse({ description: 'The CLIENT has been succesfully created.'})
-    // schema: { example: poiResponseExample[0] }
+    @ApiCreatedResponse({ description: 'The CLIENT has been succesfully created.',  schema: { example: clientResponseExample[0] }})
     @ApiForbiddenResponse({ description: 'Access forbidden.'})
-    async createClient(@Body() clientsBody: ClientsModel) {
+    async createClient(@Body() clientsBody: ClientsDTO) {
         await this.clientsService.createClients(clientsBody);
         return null;
     }
@@ -55,7 +56,7 @@ export class ClientsController {
     })
     @ApiOperation({ summary: 'Delete a CLIENT', description: 'Delete a CLIENT by ID.' })
     @ApiOkResponse({ description: 'CLIENT succesfully deleted.'})
-    @ApiResponse({ description: 'Client not found.', status: 404 })
+    @ApiResponse({ description: 'CLIENT not found.', status: 404 })
     @ApiForbiddenResponse({ description: 'Access forbidden.'})
     @ApiBadRequestResponse({ description: 'Invalid parameter.'})
     async deleteClient(@Param('id') id: number) {

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ClientPositionModel {
+export class ClientPositionDTO {
     @ApiProperty()
     id?: number;
 
