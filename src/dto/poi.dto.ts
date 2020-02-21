@@ -74,7 +74,7 @@ export class PoiDTO {
     @ApiProperty()
     status: string;
 
-    @ApiPropertyOptional()
+    @ApiPropertyOptional({ type: TagDTO, isArray: true })
     tags: TagDTO[]
 }
 

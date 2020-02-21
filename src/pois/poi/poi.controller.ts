@@ -59,7 +59,7 @@ export class PoiController {
     })
     @ApiOperation({ summary: 'Delete a POI', description: 'Delete a POI by ID.' })
     @ApiOkResponse({ description: 'POI succesfully deleted.'})
-    @ApiResponse({ description: 'poi not found.', status: 404 })
+    @ApiResponse({ description: 'POI not found.', status: 404 })
     @ApiForbiddenResponse({ description: 'Access forbidden.'})
     @ApiBadRequestResponse({ description: 'Invalid parameter.'})
     deletePoi(@Param('id') id: PoiParamRequestDto) {
@@ -67,11 +67,6 @@ export class PoiController {
     }
 
     @Patch()
-    // @ApiParam({
-    //     description: 'POI that contains an ID to update.',
-    //     name: 'body',
-    //     type: PoiDTO
-    // })
     // @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Update a POI', description: 'Update a single POI (specify the ID in the object sended).' })
     @ApiOkResponse({ description: 'POI succesfully updated.', schema: {

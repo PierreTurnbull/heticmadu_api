@@ -1,5 +1,6 @@
 export const poiResponseExample = [
     {
+        id: 1,
         name: 'name1',
         longitude: 1,
         latitude: 2,
@@ -26,6 +27,7 @@ export const poiResponseExample = [
         tags: [{id: 1, tag: 'Une premier tag'}, {id: 2, tag: 'Un deuxieme tag'}, {id: 3, tag: 'Un troisième tag'}]
     },
     {
+        id: 2,
         name: 'name2',
         longitude: 1,
         latitude: 2,
@@ -51,5 +53,4 @@ export const poiResponseExample = [
         status: true,
         tags: [{id: 1, tag: 'Une premier tag'}, {id: 2, tag: 'Un deuxieme tag'}, {id: 3, tag: 'Un troisième tag'}]
     }
-
 ];

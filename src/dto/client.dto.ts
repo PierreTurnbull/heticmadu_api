@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ClientPositionModel } from './client.position.dto';
+import { ClientPositionDTO } from './client.position.dto';
 
-export class ClientModel {
+export class ClientDTO {
     @ApiProperty()
     id: number;
 
@@ -32,6 +32,6 @@ export class ClientModel {
     @ApiProperty()
     creationDate: string;
 
-    @ApiProperty()
-    clientPositions: ClientPositionModel[]
+    @ApiProperty({ type: ClientPositionDTO, isArray: true })
+    clientPositions: ClientPositionDTO[]
 }

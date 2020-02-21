@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ClientModel } from './client.dto';
+import { ClientDTO } from './client.dto';
 
-export class ClientsModel {
-    @ApiProperty()
-    clients: ClientModel[];
+export class ClientsDTO {
+    @ApiProperty({ type: ClientDTO, isArray: true })
+    clients: ClientDTO[];
 }
