@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { PointOfInterest } from './poi.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { PoiDTO } from 'src/dto/poi.dto';
+import { PoiDTO } from '../../dto/poi.dto';
 import { PoiParamRequestDto } from '../../dto/poi.param.request.dto';
 
 @Injectable()

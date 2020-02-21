@@ -1,6 +1,6 @@
 import { Controller, Post, Get, Body, Param, Delete, UseGuards } from '@nestjs/common';
 import { ClientsService } from './clients.service';
-import { ClientsModel } from 'src/dto/clients.dto';
+import { ClientsModel } from '../dto/clients.dto';
 import { ApiTags, ApiOperation, ApiOkResponse, ApiForbiddenResponse, ApiParam, ApiCreatedResponse, ApiResponse, ApiBadRequestResponse } from '@nestjs/swagger';
 import { AuthGuard } from '@nestjs/passport';
 

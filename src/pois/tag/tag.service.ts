@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@nestjs/common';
 import { Tag } from './tag.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { TagDTO } from 'src/dto/tag.dto';
+import { TagDTO } from '../../dto/tag.dto';
 
 @Injectable()
 export class TagService {

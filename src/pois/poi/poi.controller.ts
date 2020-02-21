@@ -1,6 +1,6 @@
 import { Controller, Post, Get, Body, Param, Patch, Delete, UseGuards } from '@nestjs/common';
 import { PoiService } from './poi.service';
-import { PoiDTO } from 'src/dto/poi.dto';
+import { PoiDTO } from '../../dto/poi.dto';
 import { ApiCreatedResponse, ApiForbiddenResponse, ApiOkResponse, ApiTags, ApiParam, ApiOperation, ApiBadRequestResponse,
     ApiResponse } from '@nestjs/swagger';
 import { PoiParamRequestDto } from '../../dto/poi.param.request.dto';
