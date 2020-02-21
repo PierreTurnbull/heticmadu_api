@@ -30,7 +30,7 @@ The API documentation will be available here: http://52.47.64.108:4000/api (WIP)
 
 The database schema is [available online](https://app.quickdatabasediagrams.com/#/d/IwTszG).
 
-### Authentication (WIP: not done yet)
+### Authentication
 
 Authentication is operated by Passport. Used alongside with NestJS, it is easy to set up and it provides security to our application.
 
