@@ -5,6 +5,7 @@ import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './strategies/local.strategy';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthController } from './auth.controller';
+import { JWTStrategy } from './strategies/jwt.strategy';
 
 const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 
@@ -17,7 +18,7 @@ const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
       signOptions: { expiresIn: '12h' },
     }),
   ],
-  providers: [AuthService, LocalStrategy],
+  providers: [AuthService, LocalStrategy, JWTStrategy],
   exports: [AuthService, passportModule],
   controllers: [AuthController],
 })

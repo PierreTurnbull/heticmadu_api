@@ -1,9 +1,8 @@
-import { Controller, Post, Get, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param, Delete, UseGuards } from '@nestjs/common';
 import { ClientsService } from './clients.service';
 import { ClientsModel } from 'src/dto/clients.dto';
-import { ApiTags, ApiOperation, ApiOkResponse, ApiForbiddenResponse, ApiParam, ApiCreatedResponse, ApiResponse,
-    ApiBadRequestResponse } from '@nestjs/swagger';
-import { poiResponseExample } from '../pois/examples/get-poi-response.example';
+import { ApiTags, ApiOperation, ApiOkResponse, ApiForbiddenResponse, ApiParam, ApiCreatedResponse, ApiResponse, ApiBadRequestResponse } from '@nestjs/swagger';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('clients')
 @Controller('clients')
@@ -11,6 +10,7 @@ export class ClientsController {
     constructor(private clientsService: ClientsService) {}
 
     @Get()
+    @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Get all CLIENTS.', description: 'Returns all CLIENTS.' })
     @ApiOkResponse({ description: 'Successful operation.'})
     // schema: { example: poiResponseExample[0] }
@@ -20,6 +20,7 @@ export class ClientsController {
     }
 
     @Get(':id')
+    @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Get a CLIENT by ID', description: 'Returns a single CLIENT.' })
     @ApiParam({
         description: 'ID of CLIENT to return.',
@@ -33,6 +34,7 @@ export class ClientsController {
     }
 
     @Post()
+    @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Create a CLIENT' })
     @ApiCreatedResponse({ description: 'The CLIENT has been succesfully created.'})
     // schema: { example: poiResponseExample[0] }
@@ -44,6 +46,7 @@ export class ClientsController {
 
 
     @Delete(':id')
+    @UseGuards(AuthGuard('jwt'))
     @ApiParam({
         description: 'ID of CLIENT to delete.',
         required: true,
