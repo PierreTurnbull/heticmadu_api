@@ -37,7 +37,7 @@ Authentication is operated by Passport. Used alongside with NestJS, it is easy t
 A strategy (the way a ressource is protected) is defined and each route that requires authentication is guarded by Passport with this strategy.
 
 2 strategies are used:
-- a "local" strategy that guards the authentification route (/login). It checks for credentials in the body of the request and provides a JWT that will be returned to the client if the credentials are valid. Else, it returns a 401.
+- a "local" strategy that guards the authentification route (/auth/login). It checks for credentials in the body of the request and provides a JWT that will be returned to the client if the credentials are valid. Else, it returns a 401.
 - a JWT strategy that guards every route that requires the request to be authorized. It checks for the presence and validity of a JWT in the request. If the validity test fails, a 401 is returned.
 
 After a validity test is succesfully passed, the controller of the protected route is called. If the test fails, the controller is never called because Passport sends a response with an error code.

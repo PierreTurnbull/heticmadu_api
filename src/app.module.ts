@@ -1,10 +1,11 @@
 require('dotenv').config();
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Connection } from 'typeorm';
 import { PoiModule } from './pois/poi/poi.module';
 import { TagModule } from './pois/tag/tag.module';
 import { ClientsModule } from './clients/clients.module';
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './auth/user.module';
 
 @Module({
   imports: [
@@ -21,11 +22,11 @@ import { ClientsModule } from './clients/clients.module';
       ],
       synchronize: true
     }),
+    AuthModule,
+    UserModule,
     PoiModule,
     TagModule,
     ClientsModule
   ],
 })
-export class AppModule {
-  constructor( private readonly connection: Connection ) {}
-}
+export class AppModule {}
