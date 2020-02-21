@@ -23,7 +23,7 @@ export class PoiController {
     }
 
     @Get(':id')
-    @ApiOperation({ summary: 'Get a POI by ID', description: 'Returns single POI.' })
+    @ApiOperation({ summary: 'Get a POI by ID', description: 'Returns a single POI.' })
     @ApiParam({
         description: 'ID of POI to return.',
         required: true,
@@ -36,7 +36,7 @@ export class PoiController {
     }
 
     @Post()
-    @ApiOperation({ summary: 'Create a POI', description: 'Returns a single POI.' })
+    @ApiOperation({ summary: 'Create a POI' })
     @ApiCreatedResponse({ description: 'The POI has been succesfully created.', schema: {
             example: { id: 1, ...poiResponseExample[0]}
         }})
@@ -46,17 +46,28 @@ export class PoiController {
     }
 
     @Delete(':id')
+    @ApiParam({
+        description: 'ID of POI to delete.',
+        required: true,
+        name: 'id',
+        type: Number,
+    })
+    @ApiOperation({ summary: 'Delete a POI', description: 'Delete a POI by ID.' })
+    @ApiOkResponse({ description: 'POI succesfully deleted.'})
+    @ApiResponse({ description: 'poi not found.', status: 404 })
+    @ApiForbiddenResponse({ description: 'Access forbidden.'})
+    @ApiBadRequestResponse({ description: 'Invalid parameter.'})
     deletePoi(@Param('id') id: PoiParamRequestDto) {
         return this.poiService._deletePoi(id);
     }
 
     @Patch()
-    @ApiParam({
-        description: 'POI that contains an ID to update.',
-        name: 'body',
-        type: PoiDTO
-    })
-    @ApiOperation({ summary: 'Update a POI', description: 'Update a single POI.' })
+    // @ApiParam({
+    //     description: 'POI that contains an ID to update.',
+    //     name: 'body',
+    //     type: PoiDTO
+    // })
+    @ApiOperation({ summary: 'Update a POI', description: 'Update a single POI (specify the ID in the object sended).' })
     @ApiOkResponse({ description: 'POI succesfully updated.', schema: {
             example: poiResponseExample[0]
         }
