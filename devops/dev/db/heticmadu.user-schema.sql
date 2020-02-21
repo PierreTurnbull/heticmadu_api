@@ -3,15 +3,7 @@
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `firstName` varchar(128) DEFAULT NULL,
-  `lastName` varchar(128) DEFAULT NULL,
-  `email` varchar(128) DEFAULT NULL,
-  `password` varchar(128) DEFAULT NULL,
-  `lastConnection` varchar(32) DEFAULT NULL,
-  `pot` int(11) DEFAULT NULL,
-  `status` varchar(32) DEFAULT NULL,
-  `clientId` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `clientId` (`clientId`),
-  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`clientId`) REFERENCES `client` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `email` varchar(255) NOT NULL,
+  `hashedPassword` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
