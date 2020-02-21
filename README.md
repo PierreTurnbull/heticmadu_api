@@ -42,6 +42,12 @@ A strategy (the way a ressource is protected) is defined and each route that req
 
 After a validity test is succesfully passed, the controller of the protected route is called. If the test fails, the controller is never called because Passport sends a response with an error code.
 
+Whenever building a new route that must be protected, add the guard decorator to it for the request to be verified before reaching the controller:
+
+```
+@UseGuards(AuthGuard('jwt'))
+```
+
 ## Get started
 
 In order to start the development environment, run:

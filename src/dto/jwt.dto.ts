@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class JWTDTO {
+export class JWTPayloadDTO {
     @ApiProperty()
     sub: number;
 }
