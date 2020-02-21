@@ -11,7 +11,7 @@ export class TagController {
     constructor(private tagService: TagService) {}
 
     @Get()
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Get all TAGS.', description: 'Returns all TAGS.' })
     @ApiOkResponse({ description: 'Successful operation.', schema: {
             example: [
@@ -27,7 +27,7 @@ export class TagController {
     }
 
     @Post()
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Create a TAG.' })
     @ApiCreatedResponse({ description: 'Tag succesfully created.' })
     @ApiForbiddenResponse({ description: 'Access forbidden.'})
@@ -36,7 +36,7 @@ export class TagController {
     }
 
     @Delete(':id')
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Delete a TAG by id.' })
     @ApiOkResponse({ description: 'Tag successfully deleted.'})
     @ApiForbiddenResponse({ description: 'Access forbidden.'})

@@ -13,7 +13,7 @@ export class PoiController {
     constructor(private poiService: PoiService) {}
 
     @Get()
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Get all POIS.', description: 'Returns all POIS.' })
     @ApiOkResponse({ description: 'Successful operation.', schema: {
             example: poiResponseExample[0]
@@ -25,7 +25,7 @@ export class PoiController {
     }
 
     @Get(':id')
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Get a POI by ID', description: 'Returns a single POI.' })
     @ApiParam({
         description: 'ID of POI to return.',
@@ -39,7 +39,7 @@ export class PoiController {
     }
 
     @Post()
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Create a POI' })
     @ApiCreatedResponse({ description: 'The POI has been succesfully created.', schema: {
             example: { id: 1, ...poiResponseExample[0]}
@@ -50,7 +50,7 @@ export class PoiController {
     }
 
     @Delete(':id')
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @ApiParam({
         description: 'ID of POI to delete.',
         required: true,
@@ -72,7 +72,7 @@ export class PoiController {
     //     name: 'body',
     //     type: PoiDTO
     // })
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Update a POI', description: 'Update a single POI (specify the ID in the object sended).' })
     @ApiOkResponse({ description: 'POI succesfully updated.', schema: {
             example: poiResponseExample[0]
