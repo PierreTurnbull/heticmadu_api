@@ -1,6 +1,6 @@
 import { Controller, Post, Get, Body, Param, Delete, Patch, UseGuards } from '@nestjs/common';
 import { ClientsService } from './clients.service';
-import { ClientsDTO } from 'src/dto/clients.dto';
+import { ClientsDTO } from '../dto/clients.dto';
 import { ApiTags, ApiOperation, ApiOkResponse, ApiForbiddenResponse, ApiParam, ApiCreatedResponse, ApiResponse,
     ApiBadRequestResponse } from '@nestjs/swagger';
 import { poiResponseExample } from '../pois/examples/get-poi-response.example';
