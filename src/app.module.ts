@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: '/devops/dev/secrets/.env' });
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PoiModule } from './pois/poi/poi.module';

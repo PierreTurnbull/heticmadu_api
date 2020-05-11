@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: '/devops/dev/secrets/.env' });
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
@@ -11,7 +11,6 @@ async function bootstrap() {
       .setTitle('Group5 API')
       .setDescription('CRUD API for group5')
       .setVersion('1.0')
-      // .addTag('cats')
       .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
