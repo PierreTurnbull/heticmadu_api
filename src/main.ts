@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '/devops/dev/secrets/.env' });
+require('dotenv').config();
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';

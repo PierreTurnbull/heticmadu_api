@@ -15,7 +15,7 @@
     "start": "npm run docker:up",
     "start:dev": "npm run docker:dev:up",
     "start:debug": "npm run docker:debug:down && npm run docker:debug:up",
-    "start:docker": "nodemon",
+    "start:docker": "nodemon dotenv_config_path=./devops/dev/secrets/.env",
     "docker:up": "docker-compose -f ./devops/dev/docker/docker-compose.yml up -d",
     "docker:dev:up": "docker-compose -f ./devops/dev/docker/docker-compose.yml up",
     "docker:debug:up": "docker-compose -f ./devops/dev/docker/docker-compose.yml up --build --force-recreate",
