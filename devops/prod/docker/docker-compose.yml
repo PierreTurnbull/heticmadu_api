@@ -8,8 +8,6 @@ services:
     container_name: heticmadu-api-app
     ports:
       - 4000:4000
-    environment:
-      - DB_RANDOM_ROOT_PASSWORD=true
     depends_on:
       - api-db
   api-db:
