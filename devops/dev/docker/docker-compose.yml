@@ -3,22 +3,20 @@ version: '3.5'
 services:
   api-app:
     env_file:
-      - ../../../.env
+      - ../../../devops/dev/secrets/.env
     build:
       context: ../../..
       dockerfile: ./devops/dev/docker/Dockerfile
     container_name: heticmadu-api-app
     ports:
       - 4000:4000
-    environment:
-      - DB_RANDOM_ROOT_PASSWORD=true
     volumes:
       - ../../..:/home/node
     depends_on:
       - api-db
   api-db:
     env_file:
-      - ../../../.env
+      - ../../../devops/dev/secrets/.env
     image: mysql:5.7
     container_name: heticmadu-api-db
     environment:
