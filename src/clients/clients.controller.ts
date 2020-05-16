@@ -47,7 +47,7 @@ export class ClientsController {
 
 
     @Delete(':id')
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @ApiParam({
         description: 'ID of CLIENT to delete.',
         required: true,

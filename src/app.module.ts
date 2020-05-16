@@ -6,6 +6,8 @@ import { TagModule } from './pois/tag/tag.module';
 import { ClientsModule } from './clients/clients.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './auth/user.module';
+import { ThemeModule } from './theme/theme.module';
+import { StoryModule } from './theme/story/story.module';
 
 @Module({
   imports: [
@@ -26,7 +28,9 @@ import { UserModule } from './auth/user.module';
     UserModule,
     PoiModule,
     TagModule,
-    ClientsModule
+    ClientsModule,
+    ThemeModule,
+    StoryModule
   ],
 })
 export class AppModule {}

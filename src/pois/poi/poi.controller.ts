@@ -39,7 +39,7 @@ export class PoiController {
     }
 
     @Post()
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Create a POI' })
     @ApiCreatedResponse({ description: 'The POI has been succesfully created.', schema: {
             example: { id: 1, ...poiResponseExample[0]}
