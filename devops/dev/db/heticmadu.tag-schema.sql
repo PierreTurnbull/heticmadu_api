@@ -1,7 +1,6 @@
 /*!40101 SET NAMES binary*/;
 /*!40014 SET FOREIGN_KEY_CHECKS=0*/;
 
-/*!40103 SET TIME_ZONE='+00:00' */;
 CREATE TABLE `tag` (
   `tag` varchar(255) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
