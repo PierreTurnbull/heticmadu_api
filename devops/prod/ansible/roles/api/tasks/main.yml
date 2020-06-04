@@ -1,0 +1,70 @@
+---
+
+# Fetch db info
+
+- name: get rds info
+  rds_instance_info:
+    db_instance_identifier: heticmadu-prod
+    region: eu-west-3
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+  register: rds_info
+
+# Build docker image
+
+- name: Build docker image
+  docker_image:
+    build:
+      dockerfile: Dockerfile.template
+      path: templates
+      args: 
+    repository: "{{ docker_user }}"
+    name: "heticmadu-api-app"
+    tag: latest
+    push: yes
+    source: build
+
+# Prepare environment
+
+- name: Create directory structure
+  file:
+    path: "{{ app_directory }}"
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+
+- name: Upload .env file
+  template:
+    src: templates/.env
+    dest: "{{ app_directory }}/.env"
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+  vars:
+    db_host: "{{ rds_info.instances[0].endpoint.address }}"
+
+- name: Upload docker-compose file
+  template:
+    src: templates/docker-compose.yml
+    dest: "{{ app_directory }}/docker-compose.yml"
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+
+# Restore db (from localhost)
+
+- name: Add variables to local migration config file
+  copy:
+    src: templates/ormconfig.js.template
+    dest: templates/ormconfig.js
+  delegate_to: 127.0.0.1
+
+- name: Apply migration script
+  command: ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run --config ./devops/prod/ansible/roles/api/templates/ormconfig.js
+  delegate_to: 127.0.0.1
+
+# Launch app
+
+- name: Start docker-compose
+  docker_compose:
+    project_src: "{{ app_directory }}"
+    restarted: yes
+    remove_orphans: yes

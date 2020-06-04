@@ -1,0 +1,7 @@
+---
+
+- name: Install api
+  become: yes
+  hosts: tag_stage_prod:&tag_component_api
+  roles:
+    - { role: api, tags: ['api'] }

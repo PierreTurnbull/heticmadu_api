@@ -21,7 +21,7 @@ services:
     container_name: heticmadu-api-db
     environment:
       - MYSQL_DATABASE=${DB_SCHEMA}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_PASSWORD=${DB_PASS}
       - MYSQL_RANDOM_ROOT_PASSWORD=true
       - MYSQL_USER=${DB_USER}
     volumes:

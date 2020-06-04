@@ -1,0 +1,14 @@
+app_user: ubuntu
+app_group: '{{ app_user }}'
+app_directory: '/home/{{ app_user }}/app'
+
+aws_access_key: '{{ lookup('env','AWS_ACCESS_KEY_ID') }}'
+aws_secret_key: '{{ lookup('env','AWS_SECRET_ACCESS_KEY') }}'
+
+docker_user: '{{ lookup('env','DOCKER_USER') }}
+
+db_user: '{{ lookup('env','DB_USER') }}'
+db_pass: '{{ lookup('env','DB_PASS') }}'
+db_schema: '{{ lookup('env','DB_SCHEMA') }}'
+db_host: '{{ lookup('env','DB_HOST') }}'
+db_port: '{{ lookup('env','DB_PORT') }}'
