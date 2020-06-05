@@ -10,12 +10,6 @@
     aws_secret_key: "{{ aws_secret_key }}"
   register: rds_info
 
-# - name: Find out playbook's path
-#   shell: pwd
-#   register: playbook_path_output
-#   delegate_to: 127.0.0.1
-# - debug: var=playbook_path_output.stdout
-
 # Add variables to templates that will be used locally
 
 - name: Add variables to local migration config file
@@ -61,18 +55,18 @@
   delegate_to: 127.0.0.1
   become: false
 
-- name: Build docker image
-  docker_image:
-    build:
-      path: ../../..
-      dockerfile: ./devops/prod/db/Dockerfile
-    repository: "{{ docker_user }}"
-    name: "heticmadu-api-app"
-    tag: latest
-    push: yes
-    source: build
-  delegate_to: 127.0.0.1
-  become: false
+# - name: Build docker image
+#   docker_image:
+#     build:
+#       path: ../../..
+#       dockerfile: ./devops/prod/db/Dockerfile
+#     repository: "{{ docker_user }}"
+#     name: "heticmadu-api-app"
+#     tag: latest
+#     push: yes
+#     source: build
+#   delegate_to: 127.0.0.1
+#   become: false
 
 # Prepare environment
 
@@ -106,9 +100,8 @@
 - name: Apply migration script
   command:
     chdir: ../../..
-    cmd: ts-node -r tsconfig-paths/register /usr/local/lib/node_modules/typeorm/cli.js migration:run --config devops/prod/db/ormconfig.js
+    cmd: ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run --config devops/prod/db/ormconfig.js
   delegate_to: 127.0.0.1
-  register: command_result
   become: false
 
 # Launch app
