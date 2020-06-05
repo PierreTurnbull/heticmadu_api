@@ -43,8 +43,8 @@
 
 - name: Log into DockerHub
   docker_login:
-    username: "{{ docker_user }}"
-    password: "{{ docker_pass }}"
+    username: "{{ lookup('env','DOCKER_USER') }}"
+    password: "{{ lookup('env','DOCKER_PASS') }}"
 
 - name: Move the Dockerfile to the projet root (required for the build context)
   template:
@@ -55,18 +55,19 @@
   delegate_to: 127.0.0.1
   become: false
 
-# - name: Build docker image
-#   docker_image:
-#     build:
-#       path: ../../..
-#       dockerfile: ./devops/prod/db/Dockerfile
-#     repository: "{{ docker_user }}"
-#     name: "heticmadu-api-app"
-#     tag: latest
-#     push: yes
-#     source: build
-#   delegate_to: 127.0.0.1
-#   become: false
+- name: Build docker image
+  docker_image:
+    build:
+      path: ../../..
+      dockerfile: ./devops/prod/db/Dockerfile
+    repository: "{{ docker_user }}"
+    name: "heticmadu-api-app"
+    tag: latest
+    push: yes
+    source: build
+    pull: no
+  delegate_to: 127.0.0.1
+  become: false
 
 # Prepare environment
 
@@ -98,9 +99,9 @@
 # TODO: perform a backup
 
 - name: Apply migration script
-  command:
+  shell:
     chdir: ../../..
-    cmd: ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run --config devops/prod/db/ormconfig.js
+    cmd: ./devops/prod/scripts/apply_db_migration.sh
   delegate_to: 127.0.0.1
   become: false
 

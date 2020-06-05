@@ -37,6 +37,7 @@ script:
 # configure ansible
   - export BOTO_USE_ENDPOINT_HEURISTICS=True
   - export ANSIBLE_HOST_KEY_CHECKING=False
+  - DB_MIGRATION_DONE=0
 
 # run ansible playbook
   - ansible-playbook $DEVOPS_DIR/ansible/main.yml --user ubuntu -i $DEVOPS_DIR/ansible/inventory/ec2.py
