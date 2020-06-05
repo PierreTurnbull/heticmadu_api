@@ -1,7 +1,6 @@
 /*!40101 SET NAMES binary*/;
 /*!40014 SET FOREIGN_KEY_CHECKS=0*/;
 
-/*!40103 SET TIME_ZONE='+00:00' */;
 CREATE TABLE `point_of_interest` (
   `name` varchar(255) NOT NULL,
   `address` varchar(255) NOT NULL,
@@ -25,7 +24,7 @@ CREATE TABLE `point_of_interest` (
   `status` varchar(255) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `picture` varchar(255) NOT NULL,
-  `longitude` varchar(255) NOT NULL,
-  `latitude` varchar(255) NOT NULL,
+  `longitude` float NOT NULL,
+  `latitude` float NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

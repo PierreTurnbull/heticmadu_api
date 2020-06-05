@@ -18,11 +18,11 @@ import { StoryModule } from './theme/story/story.module';
       username: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_SCHEMA,
-      logging: true,
+      logging: process.env.ENV_TYPE === 'dev',
       entities: [
         __dirname + '/../**/*.entity{.ts,.js}',
       ],
-      synchronize: true
+      synchronize: process.env.ENV_TYPE === 'dev'
     }),
     AuthModule,
     UserModule,

@@ -1,7 +1,6 @@
 /*!40101 SET NAMES binary*/;
 /*!40014 SET FOREIGN_KEY_CHECKS=0*/;
 
-/*!40103 SET TIME_ZONE='+00:00' */;
 CREATE TABLE `client` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `numberOfEmployees` int(11) NOT NULL,
@@ -14,4 +13,4 @@ CREATE TABLE `client` (
   `type` varchar(255) NOT NULL,
   `creationDate` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
