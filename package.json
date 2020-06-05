@@ -15,6 +15,7 @@
     "start": "npm run docker:up",
     "start:debug": "npm run docker:debug:down && npm run docker:debug:up",
     "start:docker": "nodemon",
+    "migration:create": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate -n heticmadu-prod --config ./devops/prod/db/ormconfig.js",
     "docker:up": "docker-compose --env-file ./devops/dev/secrets/.env -f ./devops/dev/docker/docker-compose.yml up",
     "docker:debug:up": "docker-compose --env-file ./devops/dev/secrets/.env -f ./devops/dev/docker/docker-compose.yml up --build --force-recreate",
     "docker:debug:down": "docker-compose --env-file ./devops/dev/secrets/.env -f ./devops/dev/docker/docker-compose.yml down --rmi all -v",
