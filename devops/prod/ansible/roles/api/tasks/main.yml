@@ -55,15 +55,17 @@
 - name: Move the Dockerfile to the projet root (required for the build context)
   template:
     src: templates/Dockerfile.template
-    dest: "../../../Dockerfile"
+    dest: "../db/Dockerfile"
   vars:
     db_schema: "{{ lookup('env','DB_SCHEMA') }}"
+  delegate_to: 127.0.0.1
+  become: false
 
 - name: Build docker image
   docker_image:
     build:
       path: ../../..
-      dockerfile: ../docker/Dockerfile
+      dockerfile: ./devops/prod/db/Dockerfile
     repository: "{{ docker_user }}"
     name: "heticmadu-api-app"
     tag: latest
