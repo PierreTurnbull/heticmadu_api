@@ -18,6 +18,9 @@ import { StoryModule } from './theme/story/story.module';
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_SCHEMA,
+      extra: {
+          charset: "utf8mb4_unicode_ci"
+      },
       logging: process.env.ENV_TYPE === 'dev',
       entities: [
         __dirname + '/../**/*.entity{.ts,.js}',

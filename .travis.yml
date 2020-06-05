@@ -24,9 +24,10 @@ script:
   - tar xvf ./secrets.tar
 
 # install dependencies
-  - npm i typeorm ts-node
-  - sudo apt-get install ansible
-  - sudo apt-get install python3
+  - npm i typeorm ts-node mysql
+  - sudo apt-get install python3 python3-pip
+  - pip3 install docker-py setuptools
+  - pip3 install ansible
 
 # configure ssh
   - chmod -R 600 $DEVOPS_DIR/secrets/private_key
@@ -37,7 +38,4 @@ script:
   - export BOTO_USE_ENDPOINT_HEURISTICS=true
 
 # run ansible playbook
-  - ls -l ./devops/prod/ansible/inventory/ec2.py
-  - chmod 777 ./devops/prod/ansible/inventory/ec2.py
-  - ls -l ./devops/prod/ansible/inventory/ec2.py
   - ansible-playbook $DEVOPS_DIR/ansible/main.yml --user ubuntu -i $DEVOPS_DIR/ansible/inventory/ec2.py

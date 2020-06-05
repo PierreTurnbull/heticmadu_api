@@ -10,19 +10,67 @@
     aws_secret_key: "{{ aws_secret_key }}"
   register: rds_info
 
+# - name: Find out playbook's path
+#   shell: pwd
+#   register: playbook_path_output
+#   delegate_to: 127.0.0.1
+# - debug: var=playbook_path_output.stdout
+
+# Add variables to templates that will be used locally
+
+- name: Add variables to local migration config file
+  template:
+    src: templates/ormconfig.js.template
+    dest: "../db/ormconfig.js"
+  vars:
+    db_host: "{{ rds_info.instances[0].endpoint.address }}"
+    db_port: "{{ lookup('env','DB_PORT') }}"
+    db_schema: "{{ lookup('env','DB_SCHEMA') }}"
+    db_user: "{{ lookup('env','DB_USER') }}"
+    db_pass: "{{ lookup('env','DB_PASS') }}"
+  delegate_to: 127.0.0.1
+  become: false
+
+- name: Add variables to local .env file
+  template:
+    src: templates/.env.template
+    dest: "../secrets/.env"
+  vars:
+    db_host: "{{ rds_info.instances[0].endpoint.address }}"
+    db_port: "{{ lookup('env','DB_PORT') }}"
+    db_schema: "{{ lookup('env','DB_SCHEMA') }}"
+    db_user: "{{ lookup('env','DB_USER') }}"
+    db_pass: "{{ lookup('env','DB_PASS') }}"
+    jwt_secret: "{{ lookup('env','JWT_SECRET') }}"
+  delegate_to: 127.0.0.1
+  become: false
+
 # Build docker image
+
+- name: Log into DockerHub
+  docker_login:
+    username: "{{ docker_user }}"
+    password: "{{ docker_pass }}"
+
+- name: Move the Dockerfile to the projet root (required for the build context)
+  template:
+    src: templates/Dockerfile.template
+    dest: "../../../Dockerfile"
+  vars:
+    db_schema: "{{ lookup('env','DB_SCHEMA') }}"
 
 - name: Build docker image
   docker_image:
     build:
-      dockerfile: Dockerfile.template
-      path: templates
-      args: 
+      path: ../../..
+      dockerfile: ../docker/Dockerfile
     repository: "{{ docker_user }}"
     name: "heticmadu-api-app"
     tag: latest
     push: yes
     source: build
+  delegate_to: 127.0.0.1
+  become: false
 
 # Prepare environment
 
@@ -35,7 +83,7 @@
 
 - name: Upload .env file
   template:
-    src: templates/.env
+    src: templates/.env.template
     dest: "{{ app_directory }}/.env"
     owner: "{{ app_user }}"
     group: "{{ app_group }}"
@@ -44,22 +92,22 @@
 
 - name: Upload docker-compose file
   template:
-    src: templates/docker-compose.yml
+    src: templates/docker-compose.yml.template
     dest: "{{ app_directory }}/docker-compose.yml"
     owner: "{{ app_user }}"
     group: "{{ app_group }}"
 
 # Restore db (from localhost)
 
-- name: Add variables to local migration config file
-  copy:
-    src: templates/ormconfig.js.template
-    dest: templates/ormconfig.js
-  delegate_to: 127.0.0.1
+# TODO: perform a backup
 
 - name: Apply migration script
-  command: ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run --config ./devops/prod/ansible/roles/api/templates/ormconfig.js
+  command:
+    chdir: ../../..
+    cmd: ts-node -r tsconfig-paths/register /usr/local/lib/node_modules/typeorm/cli.js migration:run --config devops/prod/db/ormconfig.js
   delegate_to: 127.0.0.1
+  register: command_result
+  become: false
 
 # Launch app
 
