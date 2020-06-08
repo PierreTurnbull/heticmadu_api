@@ -11,7 +11,7 @@ export class ChallengeService {
     ) {}
 
     async getChallenges() {
-        return this.challengeRepository.find();
+        return this.challengeRepository.find({ relations: ['theme'] });
     }
 
     async createChallenge(challenge) {

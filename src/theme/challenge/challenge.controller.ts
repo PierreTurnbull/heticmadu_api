@@ -22,7 +22,7 @@ export class ChallengeController {
 
     @Get()
     // @UseGuards(AuthGuard('jwt'))
-    getThemes() {
+    getChallenges() {
         return this.challengeService.getChallenges();
     }
 

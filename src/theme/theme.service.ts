@@ -11,7 +11,7 @@ export class ThemeService {
     ) {}
 
     async getThemes() {
-        return this.themeRepository.find({ relations: ['stories'] });
+        return this.themeRepository.find({ relations: ['challenges'] });
     }
 
     async createTheme(theme) {

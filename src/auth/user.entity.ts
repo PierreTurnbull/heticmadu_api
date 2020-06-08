@@ -21,7 +21,7 @@ export class UserEntity {
 
   @ManyToMany(type => ChallengeEntity)
   @JoinTable({
-    name: 'user_has_stories',
+    name: 'user_has_challenges',
     joinColumn: {
       name: 'userId',
       referencedColumnName: 'id'
@@ -31,5 +31,5 @@ export class UserEntity {
       referencedColumnName: 'id'
     },
   })
-  stories: ChallengeEntity[];
+  challenges: ChallengeEntity[];
 }
