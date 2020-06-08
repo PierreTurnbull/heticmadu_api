@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from 'typeorm';
-import { StoryEntity } from './story/story.entity';
+import { ChallengeEntity } from './challenge/challenge.entity';
 
 @Entity('theme')
 export class ThemeEntity {
@@ -15,7 +15,7 @@ export class ThemeEntity {
     @Column()
     type: string;
 
-    @OneToMany(type => StoryEntity, storyEntity => storyEntity.theme)
+    @OneToMany(type => ChallengeEntity, challengeEntity => challengeEntity.theme)
     @JoinColumn()
-    stories: StoryEntity;
+    challenges: ChallengeEntity;
 }

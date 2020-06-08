@@ -50,7 +50,7 @@ export class PoiController {
     }
 
     @Delete(':id')
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @ApiParam({
         description: 'ID of POI to delete.',
         required: true,
@@ -67,7 +67,7 @@ export class PoiController {
     }
 
     @Patch()
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     @ApiOperation({ summary: 'Update a POI', description: 'Update a single POI (specify the ID in the object sended).' })
     @ApiOkResponse({ description: 'POI succesfully updated.', schema: {
             example: poiResponseExample[0]
