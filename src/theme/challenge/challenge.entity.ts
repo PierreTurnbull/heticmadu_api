@@ -1,8 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, JoinColumn } from 'typeorm';
 import { ThemeEntity } from '../theme.entity';
 
-@Entity('story')
-export class StoryEntity {
+@Entity('challenge')
+export class ChallengeEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -12,6 +12,9 @@ export class StoryEntity {
     @Column()
     text: string;
 
+    @Column()
+    type: string;
+
     @ManyToOne(type => ThemeEntity, themeEntity => themeEntity.stories)
-    theme: ThemeEntity
+    theme: ThemeEntity;
 }

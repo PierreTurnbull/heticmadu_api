@@ -1,9 +1,9 @@
-import { Controller, Post, Get, Body, Param, Delete, UseGuards, UseInterceptors, Res, UploadedFile } from '@nestjs/common';
+import { Controller, Post, Get, Body, Param, Delete, UseGuards, UseInterceptors, Res, UploadedFile, Patch } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AuthGuard } from '@nestjs/passport';
-import { StoryService } from './story.service';
 import { diskStorage } from 'multer';
 import { join } from 'path';
+import { UserService } from './user.service';
 
 const storageOptions = diskStorage({
     destination: join(__dirname, '../../uploads'),
@@ -16,14 +16,14 @@ function generateImagename(file) {
     return `${Date.now()}_${file.originalname}`;
 }
 
-@Controller('stories')
-export class StoryController {
-    constructor(private storyService: StoryService) {}
+@Controller('users')
+export class UserController {
+    constructor(private userService: UserService) {}
 
     @Get()
     // @UseGuards(AuthGuard('jwt'))
-    getThemes() {
-        return this.storyService.getStories();
+    getUsers() {
+        return this.userService.getUsers();
     }
 
     @Get(':img')
@@ -44,14 +44,19 @@ export class StoryController {
 
     @Post()
     // @UseGuards(AuthGuard('jwt'))
-    createStory(@Body() story) {
-        return this.storyService.createStory(story);
+    createUser(@Body() user) {
+        return this.userService.createUser(user);
+    }
+
+    @Patch()
+    // @UseGuards(AuthGuard('jwt'))
+    updateUser(@Body() user) {
+        return this.userService.updateUser(user);
     }
 
     @Delete(':id')
     // @UseGuards(AuthGuard('jwt'))
-    deleteStory(@Param('id') id: number) {
-        return this.storyService.deleteStory(id);
+    deleteUser(@Param('id') id: number) {
+        return this.userService.deleteUser(id);
     }
 }
-

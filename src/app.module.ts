@@ -7,7 +7,7 @@ import { ClientsModule } from './clients/clients.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './auth/user.module';
 import { ThemeModule } from './theme/theme.module';
-import { StoryModule } from './theme/story/story.module';
+import { ChallengeModule } from './theme/challenge/challenge.module';
 
 @Module({
   imports: [
@@ -30,7 +30,7 @@ import { StoryModule } from './theme/story/story.module';
     TagModule,
     ClientsModule,
     ThemeModule,
-    StoryModule
+    ChallengeModule
   ],
 })
 export class AppModule {}
