@@ -18,12 +18,13 @@ export class AuthService {
     if (!user) { return null; }
 
     const passwordIsCorrect = bcrypt.compare(password, user.hashedPassword);
-    return passwordIsCorrect ? this.getJWT(user) : null;
+    return passwordIsCorrect ? this.createJWT(user) : null;
   }
 
-  getJWT(user) {
-    const JWTPayload: JWTPayloadDTO = {
-      sub: user.id
+  createJWT(user) {
+    delete user.hashedPassword;
+    const JWTPayload = {
+      user: user
     }
     const JWT = this.jwtService.sign(JWTPayload);
     return JWT;

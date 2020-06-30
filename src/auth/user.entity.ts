@@ -4,7 +4,13 @@ import { ChallengeEntity } from '../theme/challenge/challenge.entity';
 @Entity('user')
 export class UserEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id: number
+
+  @Column()
+  firstName: string;
+
+  @Column()
+  lastName: string;
 
   @Column()
   email: string;
