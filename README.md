@@ -2,11 +2,9 @@
 
 This repository contains the API for the project heticmadu.
 
-The production API is available here: http://52.47.64.108:4000/ 
-
 The database system is not accessible from outside the server.
 
-The API documentation will be available here: http://52.47.64.108:4000/api (WIP)
+The API documentation will be available on the route /api (WIP)
 
 ## Contributors
 
