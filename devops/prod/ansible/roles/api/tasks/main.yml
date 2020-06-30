@@ -60,12 +60,12 @@
     build:
       path: ../../..
       dockerfile: ./devops/prod/db/Dockerfile
+      pull: no
     repository: "{{ docker_user }}"
-    name: "heticmadu-api-app"
+    name: "heticmadu_api_app"
     tag: latest
     push: yes
     source: build
-    pull: no
   delegate_to: 127.0.0.1
   become: false
 

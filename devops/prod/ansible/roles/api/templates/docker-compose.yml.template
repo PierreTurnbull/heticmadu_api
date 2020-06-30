@@ -4,8 +4,8 @@ services:
   api-app:
     env_file:
       - .env
-    image: {{ docker_user }}/heticmadu-api-app:latest
-    container_name: heticmadu-api-app
+    image: {{ docker_user }}/heticmadu_api_app:latest
+    container_name: heticmadu_api_app
     ports:
       - 4000:4000
 
