@@ -35,9 +35,9 @@ before_script:
   - ssh-add $DEVOPS_DIR/secrets/private_key
 
 # configure ansible
+  - DB_MIGRATION_DONE=0
   - export BOTO_USE_ENDPOINT_HEURISTICS=True
   - export ANSIBLE_HOST_KEY_CHECKING=False
-  - DB_MIGRATION_DONE=0
 
 script: 
 # run ansible playbook
