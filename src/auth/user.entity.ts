@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, JoinColumn, OneToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable, JoinColumn, OneToOne, BeforeInsert } from 'typeorm';
 import { ChallengeEntity } from '../theme/challenge/challenge.entity';
 
 @Entity('user')

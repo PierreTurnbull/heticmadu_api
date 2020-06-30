@@ -44,7 +44,7 @@ export class UserController {
 
     @Post()
     // @UseGuards(AuthGuard('jwt'))
-    createUser(@Body() user) {
+    async createUser(@Body() user) {
         return this.userService.createUser(user);
     }
 

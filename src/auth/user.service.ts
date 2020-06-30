@@ -3,6 +3,8 @@ import { UserEntity } from './user.entity';
 import { getRepository, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
+import * as bcrypt from 'bcryptjs';
+
 @Injectable()
 export class UserService {
   constructor(
@@ -18,10 +20,11 @@ export class UserService {
   }
 
   async getUsers() {
-    return this.userEntity.find({relations: ['challenges', 'currentChallenge']});
+    return this.userEntity.find({ relations: ['challenges', 'currentChallenge'] });
   }
 
   async createUser(user) {
+    user.hashedPassword = await bcrypt.hash(user.hashedPassword, 10);
     return this.userEntity.save(user);
   }
 

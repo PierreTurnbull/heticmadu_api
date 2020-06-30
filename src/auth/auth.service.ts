@@ -4,6 +4,8 @@ import { JwtService } from '@nestjs/jwt';
 import { UserEntity } from './user.entity';
 import { JWTPayloadDTO } from '../dto/jwt.dto';
 
+import * as bcrypt from 'bcryptjs';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -11,11 +13,12 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(email: string, password: string): Promise<UserEntity> {
-    const user: UserEntity = await this.userService.findOne(email);
+  async validateUser(email: string, password: string) {
+    const user = await this.userService.findOne(email);
     if (!user) { return null; }
-    const passwordIsCorrect = password === user.hashedPassword;
-    return passwordIsCorrect ? user : null;
+
+    const passwordIsCorrect = bcrypt.compare(password, user.hashedPassword);
+    return passwordIsCorrect ? this.getJWT(user) : null;
   }
 
   getJWT(user) {
