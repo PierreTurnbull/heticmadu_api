@@ -13,7 +13,7 @@ export class ClientsEntity {
     address: string;
 
     @Column()
-    rse: string;
+    rseaaaaaa: string;
 
     @Column()
     numberOfEmployees: number;
