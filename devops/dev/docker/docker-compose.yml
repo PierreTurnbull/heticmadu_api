@@ -7,7 +7,7 @@ services:
     build:
       context: ../../..
       dockerfile: ./devops/dev/docker/Dockerfile
-    container_name: heticmadu-api-app
+    container_name: heticmadu_api_app
     ports:
       - 4000:4000
     volumes:
@@ -18,10 +18,10 @@ services:
     env_file:
       - ../../../devops/dev/secrets/.env
     image: mysql:5.7
-    container_name: heticmadu-api-db
+    container_name: heticmadu_api_db
     environment:
       - MYSQL_DATABASE=${DB_SCHEMA}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_PASSWORD=${DB_PASS}
       - MYSQL_RANDOM_ROOT_PASSWORD=true
       - MYSQL_USER=${DB_USER}
     volumes:

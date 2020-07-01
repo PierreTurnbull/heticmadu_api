@@ -5,3 +5,5 @@
 **/private_key
 .idea
 **/.DS_Store
+devops/prod/db/ormconfig.js
+Dockerfile

@@ -1,0 +1,26 @@
+---
+
+# Fetch db info
+
+- name: get rds info
+  rds_instance_info:
+    db_instance_identifier: heticmadu-prod
+    region: eu-west-3
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+  register: rds_info
+
+# Add variables to templates that will be used locally
+
+- name: Add variables to local migration config file
+  template:
+    src: templates/ormconfig.js.template
+    dest: "../db/ormconfig.js"
+  vars:
+    db_host: "{{ rds_info.instances[0].endpoint.address }}"
+    db_port: "{{ lookup('env','DB_PORT') }}"
+    db_schema: "{{ lookup('env','DB_SCHEMA') }}"
+    db_user: "{{ lookup('env','DB_USER') }}"
+    db_pass: "{{ lookup('env','DB_PASS') }}"
+  delegate_to: 127.0.0.1
+  become: false

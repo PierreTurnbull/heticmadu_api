@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  api-app:
+    env_file:
+      - .env
+    image: {{ docker_user }}/heticmadu_api_app:latest
+    container_name: heticmadu_api_app
+    ports:
+      - 4000:4000
+
+volumes:
+  db-data: {}
