@@ -64,8 +64,18 @@
     repository: "{{ docker_user }}"
     name: "heticmadu_api_app"
     tag: latest
-    push: yes
+    push: no
     source: build
+  delegate_to: 127.0.0.1
+  become: false
+
+- name: Push docker image
+  docker_image:
+    repository: "{{ docker_user }}"
+    name: "heticmadu_api_app"
+    tag: latest
+    source: local
+    push: yes
   delegate_to: 127.0.0.1
   become: false
 
