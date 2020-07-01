@@ -9,11 +9,8 @@ export class ChallengeEntity {
     @Column()
     title: string;
 
-    @Column()
+    @Column({ type: 'text' })
     text: string;
-
-    @Column()
-    type: string;
 
     @ManyToOne(type => ThemeEntity, themeEntity => themeEntity.challenges)
     theme: ThemeEntity;

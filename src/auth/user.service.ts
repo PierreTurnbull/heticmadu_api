@@ -1,5 +1,6 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { UserEntity } from './user.entity';
+import { AuthService } from './auth.service';
 import { getRepository, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -10,12 +11,15 @@ export class UserService {
   constructor(
       @InjectRepository(UserEntity)
       private readonly userEntity: Repository<UserEntity>,
+      @Inject(forwardRef(() => AuthService))
+      private readonly authService: AuthService,
   ) {}
 
   async findOne(email: string): Promise<UserEntity> {
     return await getRepository(UserEntity)
       .createQueryBuilder('user')
       .where('email = :email', { email })
+      .addSelect('user.hashedPassword')
       .getOne();
   }
 
@@ -25,11 +29,17 @@ export class UserService {
 
   async createUser(user) {
     user.hashedPassword = await bcrypt.hash(user.hashedPassword, 10);
-    return this.userEntity.save(user);
+    const saveUser = await this.userEntity.save(user);
+    if (saveUser) {
+      return this.authService.createJWT(user);
+    }
   }
 
   async updateUser(user) {
-    return this.userEntity.save(user);
+    const saveUser = await this.userEntity.save(user);
+    if (saveUser) {
+      return this.authService.createJWT(user);
+    }
   }
 
   async deleteUser(id: number) {

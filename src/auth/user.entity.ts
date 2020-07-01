@@ -18,7 +18,7 @@ export class UserEntity {
   @Column()
   picture: string;
 
-  @Column()
+  @Column({ select: false })
   hashedPassword: string;
 
   @OneToOne(type => ChallengeEntity)

@@ -1,14 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { UserService } from './user.service';
 import { JwtService } from '@nestjs/jwt';
-import { UserEntity } from './user.entity';
-import { JWTPayloadDTO } from '../dto/jwt.dto';
 
 import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
   constructor(
+    @Inject(forwardRef(() => UserService))
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}
@@ -22,11 +21,9 @@ export class AuthService {
   }
 
   createJWT(user) {
-    delete user.hashedPassword;
     const JWTPayload = {
       user: user
     }
-    const JWT = this.jwtService.sign(JWTPayload);
-    return JWT;
+    return this.jwtService.sign(JWTPayload);
   }
 }
