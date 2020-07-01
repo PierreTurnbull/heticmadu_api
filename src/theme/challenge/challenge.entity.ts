@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
 import { ThemeEntity } from '../theme.entity';
+import { SubChallengeEntity } from './sub-challenge/sub-challenge.entity';
 
 @Entity('challenge')
 export class ChallengeEntity {
@@ -9,9 +10,9 @@ export class ChallengeEntity {
     @Column()
     title: string;
 
-    @Column({ type: 'text' })
-    text: string;
-
     @ManyToOne(type => ThemeEntity, themeEntity => themeEntity.challenges)
     theme: ThemeEntity;
+
+    @OneToMany(type => SubChallengeEntity, subChallengeEntity => subChallengeEntity.challenge)
+    subChallenges: SubChallengeEntity[];
 }

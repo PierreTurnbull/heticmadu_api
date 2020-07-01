@@ -1,3 +1,5 @@
+import { SubChallengeModule } from './theme/challenge/sub-challenge/sub-challenge.module';
+
 require('dotenv').config();
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -33,7 +35,8 @@ import { ChallengeModule } from './theme/challenge/challenge.module';
     TagModule,
     ClientsModule,
     ThemeModule,
-    ChallengeModule
+    ChallengeModule,
+    SubChallengeModule,
   ],
 })
 export class AppModule {}
