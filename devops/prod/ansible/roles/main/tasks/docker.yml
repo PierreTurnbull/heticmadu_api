@@ -1,0 +1,40 @@
+
+# Build docker image
+
+- name: Log into DockerHub
+  docker_login:
+    username: "{{ lookup('env','DOCKER_USER') }}"
+    password: "{{ lookup('env','DOCKER_PASS') }}"
+
+- name: Move the Dockerfile to the projet root (required for the build context)
+  template:
+    src: templates/Dockerfile.template
+    dest: "../db/Dockerfile"
+  vars:
+    db_schema: "{{ lookup('env','DB_SCHEMA') }}"
+  delegate_to: 127.0.0.1
+  become: false
+
+- name: Build docker image
+  docker_image:
+    build:
+      path: ../../..
+      dockerfile: ./devops/prod/db/Dockerfile
+      pull: no
+    repository: "{{ docker_user }}"
+    name: "heticmadu_api_app"
+    tag: latest
+    push: no
+    source: build
+  delegate_to: 127.0.0.1
+  become: false
+
+- name: Push docker image
+  docker_image:
+    repository: "{{ docker_user }}"
+    name: "heticmadu_api_app"
+    tag: latest
+    source: local
+    push: yes
+  delegate_to: 127.0.0.1
+  become: false

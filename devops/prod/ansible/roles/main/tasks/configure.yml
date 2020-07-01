@@ -1,0 +1,24 @@
+# Prepare environment
+
+- name: Create directory structure
+  file:
+    path: "{{ app_directory }}"
+    state: directory
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+
+- name: Upload .env file
+  template:
+    src: templates/.env.template
+    dest: "{{ app_directory }}/.env"
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"
+  vars:
+    db_host: "{{ rds_info.instances[0].endpoint.address }}"
+
+- name: Upload docker-compose file
+  template:
+    src: templates/docker-compose.yml.template
+    dest: "{{ app_directory }}/docker-compose.yml"
+    owner: "{{ app_user }}"
+    group: "{{ app_group }}"

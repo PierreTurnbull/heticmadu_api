@@ -83,12 +83,13 @@ The following explains this workflow in detail.
 
 TypeORM entities define the structure of the database. If you must update the structure of the database, update the entities. Changes will be reflected on the database.
 
-Once you are done working on the database structure, you can create a migration file:
+Once you are done working on the database structure, you can create a migration file.
 
 ```
 npm run migration:create
 ```
 
+This will fetch the production database informations, create an configuration for TypeORM in `ormconfig.json` and create a migration script under `./devops/prod/db/migrations/<timestamp>-heticmadu-prod.ts`.
 
 Be aware that this migration file compares the current development code with the production database. Migrations are applied only in CI, you should not have to do it manually. If you create another migration file without having applied (in CI) the previous one to the production database, it will fail applying the new migration file, since the latter will compare the development database state with an obsolete version of the production database state.
 
