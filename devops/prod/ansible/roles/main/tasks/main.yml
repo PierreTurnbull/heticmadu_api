@@ -1,0 +1,40 @@
+---
+
+- name: Add variables to local .env file
+  template:
+    src: templates/.env.template
+    dest: "../secrets/.env"
+  vars:
+    db_host: "{{ rds_info.instances[0].endpoint.address }}"
+    db_port: "{{ lookup('env','DB_PORT') }}"
+    db_schema: "{{ lookup('env','DB_SCHEMA') }}"
+    db_user: "{{ lookup('env','DB_USER') }}"
+    db_pass: "{{ lookup('env','DB_PASS') }}"
+    jwt_secret: "{{ lookup('env','JWT_SECRET') }}"
+  delegate_to: 127.0.0.1
+  become: false
+
+- name: docker
+  import_tasks: docker.yml
+
+- name: configure the environment
+  import_tasks: configure.yml
+
+# Restore db (from localhost)
+
+# TODO: perform a backup
+
+- name: Apply migration script
+  shell:
+    chdir: ../../..
+    cmd: ./devops/prod/scripts/apply_db_migration.sh
+  delegate_to: 127.0.0.1
+  become: false
+
+# Launch app
+
+- name: Start docker-compose
+  docker_compose:
+    project_src: "{{ app_directory }}"
+    restarted: yes
+    remove_orphans: yes

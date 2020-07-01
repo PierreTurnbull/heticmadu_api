@@ -1,0 +1,8 @@
+---
+
+- name: Install api
+  become: yes
+  hosts: tag_stage_prod:&tag_component_api
+  roles:
+    - { role: ormconfig, tags: ['ormconfig'] }
+    - { role: main, tags: ['main'] }
