@@ -19,7 +19,7 @@
     "docker:up": "docker-compose --env-file ./devops/dev/secrets/.env -f ./devops/dev/docker/docker-compose.yml up",
     "docker:debug:up": "docker-compose --env-file ./devops/dev/secrets/.env -f ./devops/dev/docker/docker-compose.yml up --build --force-recreate",
     "docker:debug:down": "docker-compose --env-file ./devops/dev/secrets/.env -f ./devops/dev/docker/docker-compose.yml down --rmi all -v",
-    "start:prod": "node dist/main.js",
+    "start:prod": "node dist/src/main.js",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
     "test:watch": "jest --watch",
