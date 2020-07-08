@@ -45,9 +45,15 @@ Whenever building a new route that must be protected, attach the jwt guard to it
 
 ## Get started
 
-In order to start the development environment, run:
+Set a JWT key (required for authentication)
 
+```bash
+export JWT_SECRET=<key>
 ```
+
+Start the server in dev mode
+
+```bash
 npm start
 ```
 

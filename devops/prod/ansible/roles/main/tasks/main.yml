@@ -20,8 +20,6 @@
 - name: configure the environment
   import_tasks: configure.yml
 
-# Restore db (from localhost)
-
 # TODO: perform a backup
 
 - name: Apply migration script
@@ -31,10 +29,20 @@
   delegate_to: 127.0.0.1
   become: false
 
+# Reset app
+
+- name: Reset docker
+  docker_compose:
+    stopped: yes
+    state: absent
+    project_src: "{{ app_directory }}"
+    remove_images: all
+
 # Launch app
 
 - name: Start docker-compose
   docker_compose:
     project_src: "{{ app_directory }}"
+    pull: yes
     restarted: yes
     remove_orphans: yes
