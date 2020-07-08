@@ -5,6 +5,9 @@
   docker_login:
     username: "{{ lookup('env','DOCKER_USER') }}"
     password: "{{ lookup('env','DOCKER_PASS') }}"
+    debug: yes
+  delegate_to: 127.0.0.1
+  become: false
 
 - name: Move the Dockerfile to the projet root (required for the build context)
   template:
