@@ -13,6 +13,6 @@ export class ChallengeEntity {
     @ManyToOne(type => ThemeEntity, themeEntity => themeEntity.challenges)
     theme: ThemeEntity;
 
-    @OneToMany(type => SubChallengeEntity, subChallengeEntity => subChallengeEntity.challenge)
+    @OneToMany(type => SubChallengeEntity, subChallengeEntity => subChallengeEntity.challenge, { cascade: ['update', 'insert'] })
     subChallenges: SubChallengeEntity[];
 }

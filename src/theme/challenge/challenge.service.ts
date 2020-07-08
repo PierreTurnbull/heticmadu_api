@@ -19,7 +19,7 @@ export class ChallengeService {
     }
 
     async updateChallenge(challenge) {
-        return this.challengeRepository.update(challenge.id, challenge);
+        return this.challengeRepository.save(challenge);
     }
 
     async deleteChallenge(id: number) {
