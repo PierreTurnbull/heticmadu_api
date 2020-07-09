@@ -1,4 +1,4 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from './user.service';
 import { JwtService } from '@nestjs/jwt';
 
@@ -14,7 +14,7 @@ export class AuthService {
 
   async validateUser(email: string, password: string) {
     const user = await this.userService.findOne(email);
-    if (!user) { return null; }
+    if (!user) { throw new UnauthorizedException(); }
 
     const passwordIsCorrect = bcrypt.compare(password, user.hashedPassword);
     return passwordIsCorrect ? this.createJWT(user) : null;
