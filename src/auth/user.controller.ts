@@ -26,6 +26,12 @@ export class UserController {
         return this.userService.getUsers();
     }
 
+    @Get(':id')
+    // @UseGuards(AuthGuard('jwt'))
+    getUser(@Param('id') id) {
+        return this.userService.getUser(id);
+    }
+
     @Get(':img')
     getImg(@Param('img') img, @Res() res) {
         return res.sendFile(img, { root: join(__dirname, '../../uploads') });
