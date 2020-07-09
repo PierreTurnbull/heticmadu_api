@@ -1,18 +1,31 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
-import { ThemeEntity } from '../theme.entity';
-import { SubChallengeEntity } from './sub-challenge/sub-challenge.entity';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  OneToMany,
+} from "typeorm";
+import { ThemeEntity } from "../theme.entity";
+import { SubChallengeEntity } from "./sub-challenge/sub-challenge.entity";
 
-@Entity('challenge')
+@Entity("challenge")
 export class ChallengeEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    title: string;
+  @Column()
+  title: string;
 
-    @ManyToOne(type => ThemeEntity, themeEntity => themeEntity.challenges)
-    theme: ThemeEntity;
+  @ManyToOne(
+    (type) => ThemeEntity,
+    (themeEntity) => themeEntity.challenges
+  )
+  theme: ThemeEntity;
 
-    @OneToMany(type => SubChallengeEntity, subChallengeEntity => subChallengeEntity.challenge, { cascade: ['update', 'insert'] })
-    subChallenges: SubChallengeEntity[];
+  @OneToMany(
+    (type) => SubChallengeEntity,
+    (subChallengeEntity) => subChallengeEntity.challenge,
+    { cascade: true, eager: true }
+  )
+  subChallenges: SubChallengeEntity[];
 }

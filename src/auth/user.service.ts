@@ -1,30 +1,36 @@
-import { forwardRef, Inject, Injectable } from '@nestjs/common';
-import { UserEntity } from './user.entity';
-import { AuthService } from './auth.service';
-import { getRepository, Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
+import { forwardRef, Inject, Injectable } from "@nestjs/common";
+import { UserEntity } from "./user.entity";
+import { AuthService } from "./auth.service";
+import { getRepository, Repository } from "typeorm";
+import { InjectRepository } from "@nestjs/typeorm";
 
-import * as bcrypt from 'bcryptjs';
+import * as bcrypt from "bcryptjs";
 
 @Injectable()
 export class UserService {
   constructor(
-      @InjectRepository(UserEntity)
-      private readonly userEntity: Repository<UserEntity>,
-      @Inject(forwardRef(() => AuthService))
-      private readonly authService: AuthService,
+    @InjectRepository(UserEntity)
+    private readonly userEntity: Repository<UserEntity>,
+    @Inject(forwardRef(() => AuthService))
+    private readonly authService: AuthService
   ) {}
 
   async findOne(email: string): Promise<UserEntity> {
     return await getRepository(UserEntity)
-      .createQueryBuilder('user')
-      .where('email = :email', { email })
-      .addSelect('user.hashedPassword')
+      .createQueryBuilder("user")
+      .where("email = :email", { email })
+      .addSelect("user.hashedPassword")
       .getOne();
   }
 
   async getUsers() {
-    return this.userEntity.find({ relations: ['challenges', 'currentChallenge'] });
+    return this.userEntity.find({
+      relations: ["challenges", "currentChallenge"],
+    });
+  }
+
+  async getUser(id) {
+    return this.userEntity.findOne(id);
   }
 
   async createUser(user) {

@@ -1,62 +1,78 @@
-import { Controller, Post, Get, Body, Param, Delete, UseGuards, UseInterceptors, Res, UploadedFile, Patch } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { AuthGuard } from '@nestjs/passport';
-import { ChallengeService } from './challenge.service';
-import { diskStorage } from 'multer';
-import { join } from 'path';
+import {
+  Controller,
+  Post,
+  Get,
+  Body,
+  Param,
+  Delete,
+  UseGuards,
+  UseInterceptors,
+  Res,
+  UploadedFile,
+  Patch,
+} from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
+import { AuthGuard } from "@nestjs/passport";
+import { ChallengeService } from "./challenge.service";
+import { diskStorage } from "multer";
+import { join } from "path";
 
 const storageOptions = diskStorage({
-    destination: join(__dirname, '../../uploads'),
-    filename: (req, file, callback) => {
-        callback(null, generateImagename(file));
-    }
+  destination: join(__dirname, "../../uploads"),
+  filename: (req, file, callback) => {
+    callback(null, generateImagename(file));
+  },
 });
 
 function generateImagename(file) {
-    return `${Date.now()}_${file.originalname}`;
+  return `${Date.now()}_${file.originalname}`;
 }
 
-@Controller('challenges')
+@Controller("challenges")
 export class ChallengeController {
-    constructor(private challengeService: ChallengeService) {}
+  constructor(private challengeService: ChallengeService) {}
 
-    @Get()
-    // @UseGuards(AuthGuard('jwt'))
-    getChallenges() {
-        return this.challengeService.getChallenges();
-    }
+  @Get()
+  // @UseGuards(AuthGuard('jwt'))
+  getChallenges() {
+    return this.challengeService.getChallenges();
+  }
 
-    @Get(':img')
-    getImg(@Param('img') img, @Res() res) {
-        return res.sendFile(img, { root: join(__dirname, '../../uploads') });
-    }
+  @Get(":id")
+  getChallenge(@Param("id") id: number) {
+    return this.challengeService.getChallenge(id);
+  }
 
-    @Post('upload')
-    @UseInterceptors(FileInterceptor(
-        'file',
-        {
-            storage: storageOptions
-        }
-    ))
-    addImage(@UploadedFile() img) {
-        return img;
-    }
+  @Get(":img")
+  getImg(@Param("img") img, @Res() res) {
+    return res.sendFile(img, { root: join(__dirname, "../../uploads") });
+  }
 
-    @Post()
-    // @UseGuards(AuthGuard('jwt'))
-    createChallenge(@Body() Challenge) {
-        return this.challengeService.createChallenge(Challenge);
-    }
+  @Post("upload")
+  @UseInterceptors(
+    FileInterceptor("file", {
+      storage: storageOptions,
+    })
+  )
+  addImage(@UploadedFile() img) {
+    return img;
+  }
 
-    @Patch()
-    // @UseGuards(AuthGuard('jwt'))
-    updateChallenge(@Body() Challenge) {
-        return this.challengeService.updateChallenge(Challenge);
-    }
+  @Post()
+  // @UseGuards(AuthGuard('jwt'))
+  createChallenge(@Body() Challenge) {
+    return this.challengeService.createChallenge(Challenge);
+  }
 
-    @Delete(':id')
-    // @UseGuards(AuthGuard('jwt'))
-    deleteChallenge(@Param('id') id: number) {
-        return this.challengeService.deleteChallenge(id);
-    }
+  @Patch()
+  // @UseGuards(AuthGuard('jwt'))
+  updateChallenge(@Body() Challenge) {
+    return this.challengeService.updateChallenge(Challenge);
+  }
+
+  @Delete(":id")
+  // @UseGuards(AuthGuard('jwt'))
+  deleteChallenge(@Param("id") id: number) {
+    return this.challengeService.deleteChallenge(id);
+  }
 }
