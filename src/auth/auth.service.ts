@@ -16,7 +16,8 @@ export class AuthService {
     const user = await this.userService.findOne(email);
     if (!user) { return null; }
 
-    const passwordIsCorrect = bcrypt.compare(password, user.hashedPassword);
+    const passwordIsCorrect = await bcrypt.compare(password, user.hashedPassword);
+    
     return passwordIsCorrect ? this.createJWT(user) : null;
   }
 
