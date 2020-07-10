@@ -37,14 +37,14 @@ export class UserService {
     user.hashedPassword = await bcrypt.hash(user.hashedPassword, 10);
     const saveUser = await this.userEntity.save(user);
     if (saveUser) {
-      return this.authService.createJWT(user);
+      return this.authService.getJWT(user);
     }
   }
 
   async updateUser(user) {
     const saveUser = await this.userEntity.save(user);
     if (saveUser) {
-      return this.authService.createJWT(user);
+      return this.authService.getJWT(user);
     }
   }
 
