@@ -2,8 +2,6 @@ import { forwardRef, Inject, Injectable, UnauthorizedException } from '@nestjs/c
 import { UserService } from './user.service';
 import { JwtService } from '@nestjs/jwt';
 
-import * as bcrypt from 'bcryptjs';
-
 @Injectable()
 export class AuthService {
   constructor(
@@ -16,12 +14,14 @@ export class AuthService {
     const user = await this.userService.findOne(email);
     if (!user) { throw new UnauthorizedException(); }
 
-    const passwordIsCorrect = await bcrypt.compare(password, user.hashedPassword);
-    
-    return passwordIsCorrect ? this.createJWT(user) : null;
+    const passwordIsCorrect = password === user.hashedPassword;
+
+    if (!passwordIsCorrect) { throw new UnauthorizedException(); }
+
+    return this.getJWT(user);
   }
 
-  createJWT(user) {
+  getJWT(user) {
     const JWTPayload = {
       user: user
     }
